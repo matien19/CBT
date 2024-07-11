@@ -39,7 +39,7 @@ error_reporting(0);
           if (mysqli_num_rows($query_chek) == 0){
             mysqli_query($con, "INSERT INTO tbl_guru VALUES ('$nip','$nama')") or die(mysqli_error($con));      
 
-            mysqli_query($con, "INSERT INTO tbl_user VALUES ('','$nip','$pass','$peran','$nama')"); 
+            mysqli_query($con, "INSERT INTO tbl_user VALUES ('','$nip','$pass','$peran','$nama','$stat')") or die(mysqli_error($con)); 
             echo '
            
              <script>
