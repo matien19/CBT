@@ -252,7 +252,8 @@ include "../footer.php";
      
               <div class="form-group">
                 <label for="tahun akademik">Kelas</label>
-                        <select class="form-control" name="kelas">
+                        <select class="form-control" name="kelas" required>
+                          <option value="" selected disabled>-- Pilih Kelas --</option>
                           <option>X</option>
                           <option>XI</option>
                           <option>XII</option>
@@ -260,11 +261,11 @@ include "../footer.php";
               </div>
               <div class="form-group">
                 <label for="matkul">Jurusan</label>
-                    </select>
                         <select class="form-control" name="jurusan">
+                        <select class="form-control" name="jurusan" required>
+                        <option value="" selected disabled>-- Pilih jurusan --</option>
                     <?php
                     $sql_jurusan =  mysqli_query($con, "SELECT * FROM tbl_jurusan") or die (mysqli_error($con));
-                    
                     while($data_jurusan = mysqli_fetch_array($sql_jurusan)){
                       ?>
                       <option value = "<?=$data_jurusan['kode_jurusan'];?>"><b> <?=$data_jurusan['kode_jurusan'];?></b> - [ <?=$data_jurusan['nama'];?> ]</option>
