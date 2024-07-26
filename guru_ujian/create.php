@@ -14,43 +14,39 @@ require_once "../database/config.php";
   <?php
     if (isset($_POST['tambahdata']))
     {
-      $username     = trim(mysqli_real_escape_string($con, $_POST['username']));
-      $usernamefix     = strtolower($username);
-      $password   = trim(mysqli_real_escape_string($con, $_POST['password']));
-      $repassword   = trim(mysqli_real_escape_string($con, $_POST['repassword']));
-      $aktivasi = 1;
-      if ($password !== $repassword){
-        echo '
-        
-        <script>
-            swal("Chek Password", "Password harus Sama!", "warning");
-            setTimeout(function(){ 
-            window.location.href = "../admin_administrator";
-            }, 2000);
-        </script>
-        ';
-      } else
-      {
-        $pass         = sha1($repassword);
-        $nama         = trim(mysqli_real_escape_string($con, $_POST['nama']));
-        $peran        = 'admin';
-        
-        mysqli_query($con, "INSERT INTO tbl_user VALUES ('','$usernamefix','$pass','$peran','$nama','$aktivasi')") or die (mysqli_error($con));
-        
-        echo '
-        
-        <script>
-          swal("Berhasil", "Data Admin telah ditambahkan", "success");
-          
-          setTimeout(function(){ 
-          window.location.href = "../admin_administrator";
+      $id_guru     = trim(mysqli_real_escape_string($con, $_POST['nip']));
+      $id_mapel     = trim(mysqli_real_escape_string($con, $_POST['mapel']));
+      $nama_ujian   = trim(mysqli_real_escape_string($con, $_POST['nama']));
+      $jml_soal   = trim(mysqli_real_escape_string($con, $_POST['soal']));
+      $kelas   = trim(mysqli_real_escape_string($con, $_POST['kelas']));
+      $jurusan   = trim(mysqli_real_escape_string($con, $_POST['jurusan']));
+      $waktu   = trim(mysqli_real_escape_string($con, $_POST['waktu']));
+      $jenis   = 'set';
 
-          }, 1000);
-        </script>
-        ';
-      }
+      $tgl_mulai   = trim(mysqli_real_escape_string($con, $_POST['tgl_mulai']));
+      $waktu_mulai   = trim(mysqli_real_escape_string($con, $_POST['wkt_mulai']));
+      $mulai = $tgl_mulai. " ". $waktu_mulai;
       
-    }
+      $tgl_selesai   = trim(mysqli_real_escape_string($con, $_POST['tgl_selesai']));
+      $waktu_selesai   = trim(mysqli_real_escape_string($con, $_POST['wkt_selesai']));
+      $terlambat = $tgl_selesai. " ". $waktu_selesai;
+
+      $token = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
+
+          mysqli_query($con, "INSERT INTO tbl_guru_tes VALUES ('','$id_guru','$id_mapel','$nama_ujian','$jml_soal','$kelas','$jurusan','$waktu','$jenis','$mulai','$terlambat','$token')") or die (mysqli_error($con));
+         
+          echo '
+              <script>
+             swal("Berhasil", "Data Ujian telah ditambahkan", "success");
+             
+             setTimeout(function(){ 
+             window.location.href = "../guru_ujian";
+
+             }, 1000);
+           </script>
+          ';
+      }
+        
     ?>
 
 

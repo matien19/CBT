@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Jul 2024 pada 08.41
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 7.4.30
+-- Waktu pembuatan: 26 Jul 2024 pada 06.04
+-- Versi server: 10.4.27-MariaDB
+-- Versi PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,7 @@ CREATE TABLE `tbl_guru` (
 --
 
 INSERT INTO `tbl_guru` (`nip`, `nama`) VALUES
-('0001', 'guru 1'),
+('0001', 'Matien Hakim Falahudin Bachtiar'),
 ('0002', 'guru 2'),
 ('0003', 'guru 3'),
 ('0004', 'guru 4'),
@@ -78,7 +78,7 @@ INSERT INTO `tbl_guru_mapel` (`id`, `nip_guru`, `id_mapel`) VALUES
 
 CREATE TABLE `tbl_guru_tes` (
   `id` int(6) NOT NULL,
-  `id_guru` int(6) NOT NULL,
+  `id_guru` varchar(10) NOT NULL,
   `id_mapel` int(6) NOT NULL,
   `nama_ujian` varchar(200) NOT NULL,
   `jumlah_soal` int(6) NOT NULL,
@@ -86,7 +86,6 @@ CREATE TABLE `tbl_guru_tes` (
   `jurusan` varchar(200) NOT NULL,
   `waktu` int(6) NOT NULL,
   `jenis` enum('acak','set') NOT NULL,
-  `detil_jenis` varchar(500) NOT NULL,
   `tgl_mulai` datetime NOT NULL,
   `terlambat` datetime NOT NULL,
   `token` varchar(5) NOT NULL
@@ -96,8 +95,9 @@ CREATE TABLE `tbl_guru_tes` (
 -- Dumping data untuk tabel `tbl_guru_tes`
 --
 
-INSERT INTO `tbl_guru_tes` (`id`, `id_guru`, `id_mapel`, `nama_ujian`, `jumlah_soal`, `kelas`, `jurusan`, `waktu`, `jenis`, `detil_jenis`, `tgl_mulai`, `terlambat`, `token`) VALUES
-(13, 3, 25, 'MTK', 1, 'X', 'IPA', 20, 'set', '', '2024-07-07 11:55:00', '2024-07-07 17:00:00', 'VVCOZ');
+INSERT INTO `tbl_guru_tes` (`id`, `id_guru`, `id_mapel`, `nama_ujian`, `jumlah_soal`, `kelas`, `jurusan`, `waktu`, `jenis`, `tgl_mulai`, `terlambat`, `token`) VALUES
+(13, '0001', 3, 'UAS', 1, 'X', 'IPA', 20, 'set', '2024-07-07 11:55:00', '2024-07-07 17:00:00', 'LHQZA'),
+(17, '0001', 6, 'UTS', 1, 'XI', 'IPA', 2, 'set', '2024-07-23 12:15:00', '2024-07-23 12:15:00', 'DKGHN');
 
 -- --------------------------------------------------------
 
@@ -291,7 +291,14 @@ INSERT INTO `tbl_user` (`id`, `username`, `password`, `peran`, `nama`, `aktivasi
 (41, '42421057', '001342bff0dc6cabd1bec4b4c0a2a93d', 'siswa', 'Eko Gunawan', 'A'),
 (40, '42421056', '07008204b59be899249e5b83ab461c04', 'siswa', 'Candrasa Asmaradanta', 'A'),
 (39, '42421055', 'dd1cdecfc1aca098db49f4a3a4aee60e', 'siswa', 'Bayu Aji Assidiq', 'A'),
-(38, '42421054', '34975a3c2cebe4caa8b1aa565be97720', 'siswa', 'Auliya Fitra Sabila', 'A');
+(38, '42421054', '34975a3c2cebe4caa8b1aa565be97720', 'siswa', 'Auliya Fitra Sabila', 'A'),
+(55, '0001', '25bbdcd06c32d477f7fa1c3e4a91b032', 'guru', 'Matien Hakim Falahudin Bachtiar', 'A'),
+(56, '0002', 'fcd04e26e900e94b9ed6dd604fed2b64', 'guru', 'guru 2', 'A'),
+(57, '0003', '7cd86ecb09aa48c6e620b340f6a74592', 'guru', 'guru 3', 'A'),
+(58, '0004', '95b09698fda1f64af16708ffb859eab9', 'guru', 'guru 4', 'A'),
+(59, '0005', 'd39934ce111a864abf40391f3da9cdf5', 'guru', 'guru 5', 'A'),
+(60, '0006', '7f8bb0fe8b33780a08fe6b60ced14529', 'guru', 'guru 6', 'A'),
+(61, '0007', '6950aac2d7932e1f1a4c3cf6ada1316e', 'guru', 'guru 7', 'A');
 
 --
 -- Indexes for dumped tables
@@ -373,7 +380,7 @@ ALTER TABLE `tbl_guru_mapel`
 -- AUTO_INCREMENT untuk tabel `tbl_guru_tes`
 --
 ALTER TABLE `tbl_guru_tes`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_ikut_ujian`
@@ -403,7 +410,7 @@ ALTER TABLE `tbl_soal`
 -- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

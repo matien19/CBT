@@ -10,17 +10,17 @@ require_once "../database/config.php";
   <?php
       
       $id = @$_GET['id'];
-      mysqli_query($con, "DELETE FROM tbl_user WHERE Id='$id'") or die (mysqli_error($con));
+      mysqli_query($con, "DELETE FROM tbl_guru_tes WHERE id='$id'") or die (mysqli_error($con));
     ?>
 
   <!-- /.sweetalert -->
   <script src="../assets_adminlte/js/sweetalert2.js"></script>
 <script src="../assets_adminlte/js/sweetalert.js"></script>
 <script>
-  swal("Berhasil", "Data Admin telah dihapus", "success");
+  swal("Berhasil", "Data Ujian telah dihapus", "success");
   
   setTimeout(function(){ 
-   window.location.href = "../admin_administrator";
+   window.location.href = "../guru_ujian";
 
   }, 1000);
 </script> 

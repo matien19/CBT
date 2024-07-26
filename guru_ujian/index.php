@@ -76,7 +76,7 @@ include '../sidebar_guru.php';
                     <th style="width:20%";><center>Nama Tes</center></th>
                     <th ><center>Mata Pelajaran</center></th>
                     <th style="width:15%";><center>Jumlah Soal </center></th>
-                    <th ><center>Kelas / Jurusan</center></th>
+                    <th ><center>Kelas - Jurusan</center></th>
                     <th ><center>Waktu</center></th>
                     <th><center>Aksi</center></th>
                     </tr>
@@ -92,6 +92,7 @@ include '../sidebar_guru.php';
                           {
                             while($data = mysqli_fetch_array($sql_tes))
                             {
+                              $id =  $data['id'];
                               $id_mapel = $data['id_mapel'];
                                 ?>
                             <tr>
@@ -101,7 +102,7 @@ include '../sidebar_guru.php';
                                   <td>
                                    <h6>
                                    <?=$data['nama_ujian'].'<br> Token : '. $data['token'];?>
-                                   <a href="refresh.php?id=<?= $data['id']; ?>" class="btn btn-light-red btn-sm" onclick="return confirm('Anda akan merefresh Token [ <?= $data['nama_ujian']; ?> ]?')" style="color:green;">
+                                   <a href="refresh.php?id=<?= $id; ?>" class="btn btn-light-red btn-sm" onclick="return confirm('Anda akan merefresh Token [ <?= $data['nama_ujian']; ?> ]?')" style="color:green;">
                                    <i class="fas fa-sync"></i>
                                    
                               </a> 
@@ -144,11 +145,11 @@ include '../sidebar_guru.php';
 
                                 <td>
                                 <center>
-                                <button class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#modal-editdata" data-id="<?=$id;?>" data-kelas="<?=$data['kelas'];?>">
+                                <button class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#modal-editdata" data-id="<?=$id;?>" data-nis="<?=$data['nis'];?>" data-nama="<?=$data['nama'];?>" data-kelas="<?=$data['kelas'];?>"  data-jurusan="<?=$data['kode_jurusan'];?>" data-stat="<?=$stt?>">
                                   <i class="fas fa-edit"></i>
                                    Edit 
                                 </button> 
-                                  <a href="delete.php?id=<?=$id?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda akan menghapus data Ujian [ <?=$data['username'] ?> ]?')">
+                                  <a href="delete.php?id=<?=$id?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda akan menghapus data ujian [ <?=$data['nama_ujian'] ?> ]?')">
                                   <i class="fas fa-trash"></i>
                                    Hapus
                                 </a> 
@@ -219,7 +220,7 @@ include "../footer.php";
              
               <div class="form-group">
                 <label for="nama">Nama Tes</label>
-                <input type="text" name="nama" class="form-control"  placeholder="Masukan Username" required>
+                <input type="text" name="nama" class="form-control"  placeholder="Masukan Nama Tes" required>
               </div>
 
               <div class="form-group">
@@ -230,7 +231,7 @@ include "../footer.php";
                     $sql_mapel =  mysqli_query($con, "SELECT * FROM tbl_mapel, tbl_guru_mapel WHERE nip_guru = $nip AND tbl_mapel.id = tbl_guru_mapel.id_mapel") or die (mysqli_error($con));
                     while($data_mapel = mysqli_fetch_array($sql_mapel)){
                       ?>
-                      <option value = "<?=$data_mapel['nama'];?>"><?=$data_mapel['nama'];?> </option>
+                      <option value = "<?=$data_mapel['id_mapel'];?>"><?=$data_mapel['nama'];?> </option>
                       <?php
                     }
                     ?>
@@ -253,7 +254,7 @@ include "../footer.php";
                     $sql_jurusan =  mysqli_query($con, "SELECT * FROM tbl_jurusan") or die (mysqli_error($con));
                     while($data_jurusan = mysqli_fetch_array($sql_jurusan)){
                       ?>
-                      <option value = "<?=$data_jurusan['kode_jurusan'];?>"><b> <?=$data_jurusan['kode_jurusan'];?></b> - [ <?=$data_jurusan['nama'];?> ]</option>
+                      <option value = "<?=$data_jurusan['nama'];?>"><b> <?=$data_jurusan['kode_jurusan'];?></b> - [ <?=$data_jurusan['nama'];?> ]</option>
                       <?php
                     }
                     ?>
@@ -262,9 +263,31 @@ include "../footer.php";
                <div class="form-group">
                 <label for="soal">Jumlah Soal</label>
                 <input type="number" name="soal" class="form-control"  placeholder="Masukan Jumlah Soal" required>
+                <p class="text-danger" style="font-size: 12px;">*Masukan jumlah soal tidak melebihi bank soal mapel</p>
               </div>
-            </div>
-            <div class="modal-footer pull-right">
+               <div class="form-group">
+                <label for="tgl">Tanggal Mulai</label>
+                <div class="d-flex ">
+                  <input type="date" name='tgl_mulai' class="form-control w-50 me-2" placeholder="Tgl" required>
+                  <input type="time" name='wkt_mulai' class="form-control w-25  mx-2" placeholder="Waktu" required>
+                </div>
+               </div>
+               <div class="form-group">
+                <label for="tgl">Tanggal Selesai</label>
+                <div class="d-flex ">
+                  <input type="date" name='tgl_selesai' class="form-control w-50 me-2" placeholder="Tgl" required>
+                  <input type="time" name='wkt_selesai' class="form-control w-25 mx-2" placeholder="Waktu" required>
+                </div>
+               </div>
+               <div class="form-group">
+                <label for="wktu">Waktu</label>
+                <div class="d-flex ">
+                <input type="number" name="waktu" class="form-control w-25"  placeholder="Menit" required>
+                <label for="wktu" class="m-2"><b>menit</b></label>
+              </div>
+              </div>
+              </div>
+                <div class="modal-footer pull-right">
               <button type="submit" class="btn btn-danger" name="tambahdata" style="background-color:#86090f"><i class="nav-icon fas fa-plus"></i>Tambah Data</button>
               </form>
             </div>
@@ -292,14 +315,76 @@ include "../footer.php";
             </div>
             <form class="form-horizontal" action="update.php" method="POST" >
             <div class="modal-body">
-            <div class="form-group">
-                <input type="text" name="id" class="form-control"  value="<?=$id?>" hidden>
+            <input type="number" name="nip" value="<?=$nip;?>" class="form-control" hidden>
+             
+              <div class="form-group">
+                <label for="nama">Nama Tes</label>
+                <input type="text" name="nama" class="form-control"  placeholder="Masukan Nama Tes" required>
               </div>
-            <div class="form-group">
+
+              <div class="form-group">
+                <label for="mapel">Mata Pelajaran</label>
+                    <select class="form-control" name="mapel" required>
+                    <option value="" selected disabled > -- Pilih Mata Pelajaran --</option>
+                    <?php
+                    $sql_mapel =  mysqli_query($con, "SELECT * FROM tbl_mapel, tbl_guru_mapel WHERE nip_guru = $nip AND tbl_mapel.id = tbl_guru_mapel.id_mapel") or die (mysqli_error($con));
+                    while($data_mapel = mysqli_fetch_array($sql_mapel)){
+                      ?>
+                      <option value = "<?=$data_mapel['id_mapel'];?>"><?=$data_mapel['nama'];?> </option>
+                      <?php
+                    }
+                    ?>
+                    </select>             
+               </div>
+               <div class="form-group">
                 <label for="kelas">Kelas</label>
-                <input type="text" name="kelas" class="form-control">
+                        <select class="form-control" name="kelas" required>
+                          <option value="" selected disabled>-- Pilih Kelas --</option>
+                          <option>X</option>
+                          <option>XI</option>
+                          <option>XII</option>
+                        </select>
               </div>
-              
+              <div class="form-group">
+                <label for="jurusan">Jurusan</label>
+                        <select class="form-control" name="jurusan" required>
+                        <option value="" selected disabled>-- Pilih jurusan --</option>
+                    <?php
+                    $sql_jurusan =  mysqli_query($con, "SELECT * FROM tbl_jurusan") or die (mysqli_error($con));
+                    while($data_jurusan = mysqli_fetch_array($sql_jurusan)){
+                      ?>
+                      <option value = "<?=$data_jurusan['nama'];?>"><b> <?=$data_jurusan['kode_jurusan'];?></b> - [ <?=$data_jurusan['nama'];?> ]</option>
+                      <?php
+                    }
+                    ?>
+                    </select>
+               </div>
+               <div class="form-group">
+                <label for="soal">Jumlah Soal</label>
+                <input type="number" name="soal" class="form-control"  placeholder="Masukan Jumlah Soal" required>
+                <p class="text-danger" style="font-size: 12px;">*Masukan jumlah soal tidak melebihi bank soal mapel</p>
+              </div>
+               <div class="form-group">
+                <label for="tgl">Tanggal Mulai</label>
+                <div class="d-flex ">
+                  <input type="date" name='tgl_mulai' class="form-control w-50 me-2" placeholder="Tgl" required>
+                  <input type="time" name='wkt_mulai' class="form-control w-25  mx-2" placeholder="Waktu" required>
+                </div>
+               </div>
+               <div class="form-group">
+                <label for="tgl">Tanggal Selesai</label>
+                <div class="d-flex ">
+                  <input type="date" name='tgl_selesai' class="form-control w-50 me-2" placeholder="Tgl" required>
+                  <input type="time" name='wkt_selesai' class="form-control w-25 mx-2" placeholder="Waktu" required>
+                </div>
+               </div>
+               <div class="form-group">
+                <label for="wktu">Waktu</label>
+                <div class="d-flex ">
+                <input type="number" name="waktu" class="form-control w-25"  placeholder="Menit" required>
+                <label for="wktu" class="m-2"><b>menit</b></label>
+              </div>
+              </div>
             </div>
             <div class="modal-footer pull-right">
               <button type="submit" class="btn btn-danger" name="editdata" style="background-color:#86090f"><i class="nav-icon fas fa-edit"></i>Edit Data</button>
@@ -318,6 +403,24 @@ include "../footer.php";
 <?php 
 include "../script.php";
 ?>
+<script type="text/javascript">
+$('#modal-editsiswa').on('show.bs.modal', function(e) {
 
+    //get data-id attribute of the clicked element
+     var nis          = $(e.relatedTarget).data('nis');
+     var nama         = $(e.relatedTarget).data('nama');
+     var kelas      = $(e.relatedTarget).data('kelas');
+     var jurusan       = $(e.relatedTarget).data('jurusan');
+     var stat       = $(e.relatedTarget).data('stat');
+     
+     $(e.currentTarget).find('input[name="nis"]').val(nis);
+     $(e.currentTarget).find('input[name="nis2"]').val(nis);
+     $(e.currentTarget).find('input[name="nama"]').val(nama);
+     $(e.currentTarget).find('select[name="kelas"]').val(kelas);
+     $(e.currentTarget).find('select[name="jurusan"]').val(jurusan);
+     $(e.currentTarget).find('input[name="stat"]').val(stat);
+
+});
+</script>
 </body>
 </html>

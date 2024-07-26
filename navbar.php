@@ -40,7 +40,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-light-red elevation-4" style="background-color:#ffffff">
+  <aside class="main-sidebar sidebar-light-green elevation-4" style="background-color:#ffffff">
     <!-- Brand Logo -->
     <font color:"white">
     <a href="index3.html" class="brand-link">
