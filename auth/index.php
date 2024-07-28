@@ -158,14 +158,14 @@ if (isset($_POST['login']))
     else
     {
       echo '
-      <script>
-      Swal.fire({
-        title: "Akun tidak ditemukan!",
-        text: "",
-        icon: "error"
-      });
-      window.location.href = "./logout.php";
-      </script>
+  <script>
+              swal("Gagal Login !", "Akun Tidak Ditemukan / Password salah", "error");
+              
+              setTimeout(function(){ 
+              window.location.href = "./logout.php";
+
+              }, 1500);
+            </script>
       ';
 
     }
