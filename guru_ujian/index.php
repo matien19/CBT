@@ -157,9 +157,7 @@ if (isset($_SESSION['peran'])) {
                                   <td>
                                     <center>
                                       <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#modal-editdata" data-id="<?= $id; ?>" data-nis="<?= $data['nis']; ?>"
-                                        data-nama="<?= $data['nama']; ?>" data-kelas="<?= $data['kelas']; ?>"
-                                        data-jurusan="<?= $data['kode_jurusan']; ?>" data-stat="<?= $stt ?>">
+                                        data-target="#modal-editdata" data-id="<?= $id; ?>" data-nip="<?= $data['nip']; ?>" data-nama="<?= $data['nama_ujian']; ?>" data-mapel="<?= $id_mapel; ?>" data-kelas="<?= $data['kelas']; ?>" data-jurusan="<?= $data['jurusan']; ?>" data-jumlah="<?= $data['jumlah_soal'];  ?>" data-mulai="<?= $data['tgl_mulai']; ?>" data-terlambat="<?= $data['terlambat']; ?>"  data-waktu="<?= $data['waktu']; ?>" >
                                         <i class="fas fa-edit"></i>
                                         Edit
                                       </button>
@@ -324,7 +322,7 @@ if (isset($_SESSION['peran'])) {
             <h5 class="modal-title">
               <font color="ffffff">
                 <i class="nav-icon fas fa-edit"></i>
-                Edit Data Kelas
+                Edit Data Ujian
               </font>
 
             </h5>
@@ -334,6 +332,7 @@ if (isset($_SESSION['peran'])) {
           </div>
           <form class="form-horizontal" action="update.php" method="POST">
             <div class="modal-body">
+              <input type="number" name="id" value="<?= $id; ?>" class="form-control" hidden>
               <input type="number" name="nip" value="<?= $nip; ?>" class="form-control" hidden>
 
               <div class="form-group">
@@ -426,21 +425,39 @@ if (isset($_SESSION['peran'])) {
   include "../script.php";
   ?>
   <script type="text/javascript">
-    $('#modal-editsiswa').on('show.bs.modal', function (e) {
+    $('#modal-editdata').on('show.bs.modal', function (e) {
 
       //get data-id attribute of the clicked element
-      var nis = $(e.relatedTarget).data('nis');
-      var nama = $(e.relatedTarget).data('nama');
-      var kelas = $(e.relatedTarget).data('kelas');
-      var jurusan = $(e.relatedTarget).data('jurusan');
-      var stat = $(e.relatedTarget).data('stat');
+      var id        = $(e.relatedTarget).data('id');
+      var nip       = $(e.relatedTarget).data('nip');
+      var nama      = $(e.relatedTarget).data('nama');
+      var mapel     = $(e.relatedTarget).data('mapel');
+      var kelas     = $(e.relatedTarget).data('kelas');
+      var jurusan   = $(e.relatedTarget).data('jurusan');
+      var jumlah    = $(e.relatedTarget).data('jumlah');
+      var waktu     = $(e.relatedTarget).data('waktu');
+      var tglMulai  = $(e.relatedTarget).data('mulai');
+      var terlambat = $(e.relatedTarget).data('terlambat');
 
-      $(e.currentTarget).find('input[name="nis"]').val(nis);
-      $(e.currentTarget).find('input[name="nis2"]').val(nis);
+      var tglMulaiDate  = tglMulai.split(' ')[0];
+      var tglMulaiTime  = tglMulai.split(' ')[1];
+      var terlambatDate = terlambat.split(' ')[0];
+      var terlambatTime = terlambat.split(' ')[1];
+        
+
+      $(e.currentTarget).find('input[name="id"]').val(id);
+      $(e.currentTarget).find('input[name="nip"]').val(nip);
       $(e.currentTarget).find('input[name="nama"]').val(nama);
+      $(e.currentTarget).find('select[name="mapel"]').val(mapel);
       $(e.currentTarget).find('select[name="kelas"]').val(kelas);
       $(e.currentTarget).find('select[name="jurusan"]').val(jurusan);
-      $(e.currentTarget).find('input[name="stat"]').val(stat);
+      $(e.currentTarget).find('input[name="soal"]').val(jumlah);
+      $(e.currentTarget).find('input[name="waktu"]').val(waktu);
+
+      $(e.currentTarget).find('input[name="tgl_mulai"]').val(tglMulaiDate);
+      $(e.currentTarget).find('input[name="wkt_mulai"]').val(tglMulaiTime);
+      $(e.currentTarget).find('input[name="tgl_selesai"]').val(terlambatDate);
+      $(e.currentTarget).find('input[name="wkt_selesai"]').val(terlambatTime);
 
     });
   </script>
