@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Jul 2024 pada 06.04
+-- Waktu pembuatan: 03 Agu 2024 pada 18.52
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -62,13 +62,17 @@ CREATE TABLE `tbl_guru_mapel` (
 --
 
 INSERT INTO `tbl_guru_mapel` (`id`, `nip_guru`, `id_mapel`) VALUES
-(23, '0001', 7),
-(22, '0001', 6),
+(27, '0001', 4),
+(26, '0001', 3),
 (7, '0003', 4),
 (9, '0005', 4),
 (10, '0005', 8),
-(21, '0001', 5),
-(20, '0001', 1);
+(25, '0001', 2),
+(24, '0001', 1),
+(28, '0001', 5),
+(29, '0001', 6),
+(30, '0001', 7),
+(31, '0001', 8);
 
 -- --------------------------------------------------------
 
@@ -83,7 +87,7 @@ CREATE TABLE `tbl_guru_tes` (
   `nama_ujian` varchar(200) NOT NULL,
   `jumlah_soal` int(6) NOT NULL,
   `kelas` varchar(200) NOT NULL,
-  `jurusan` varchar(200) NOT NULL,
+  `kode_jurusan` varchar(20) NOT NULL,
   `waktu` int(6) NOT NULL,
   `jenis` enum('acak','set') NOT NULL,
   `tgl_mulai` datetime NOT NULL,
@@ -95,9 +99,10 @@ CREATE TABLE `tbl_guru_tes` (
 -- Dumping data untuk tabel `tbl_guru_tes`
 --
 
-INSERT INTO `tbl_guru_tes` (`id`, `id_guru`, `id_mapel`, `nama_ujian`, `jumlah_soal`, `kelas`, `jurusan`, `waktu`, `jenis`, `tgl_mulai`, `terlambat`, `token`) VALUES
-(13, '0001', 3, 'UAS', 1, 'X', 'IPA', 20, 'set', '2024-07-07 11:55:00', '2024-07-07 17:00:00', 'LHQZA'),
-(17, '0001', 6, 'UTS', 1, 'XI', 'IPA', 2, 'set', '2024-07-23 12:15:00', '2024-07-23 12:15:00', 'DKGHN');
+INSERT INTO `tbl_guru_tes` (`id`, `id_guru`, `id_mapel`, `nama_ujian`, `jumlah_soal`, `kelas`, `kode_jurusan`, `waktu`, `jenis`, `tgl_mulai`, `terlambat`, `token`) VALUES
+(13, '0001', 1, 'UASsss', 11, 'XII', 'A003', 21, 'set', '2024-08-01 17:55:00', '2024-08-01 23:00:00', 'TFZNH'),
+(17, '0001', 6, 'UTS', 1, 'XI', 'A001', 2, 'set', '2024-07-23 12:15:00', '2024-07-23 12:15:00', 'DKGHN'),
+(20, '0001', 3, 'TESS', 1, 'X', 'A001', 2, 'set', '2024-08-22 19:57:00', '2024-08-30 19:57:00', 'JRYKC');
 
 -- --------------------------------------------------------
 
@@ -135,7 +140,7 @@ CREATE TABLE `tbl_jurusan` (
 --
 
 INSERT INTO `tbl_jurusan` (`kode_jurusan`, `nama`) VALUES
-('A003', 'Bahasa Inggris'),
+('A003', 'IPS'),
 ('A001', 'IPA');
 
 -- --------------------------------------------------------
@@ -228,9 +233,9 @@ INSERT INTO `tbl_siswa` (`nis`, `nama`, `kelas`, `kode_jurusan`, `stat`) VALUES
 
 CREATE TABLE `tbl_soal` (
   `id` int(6) NOT NULL,
-  `id_guru` int(6) NOT NULL,
+  `id_guru` varchar(10) NOT NULL,
   `id_mapel` int(6) NOT NULL,
-  `bobot` int(2) NOT NULL,
+  `kelas` varchar(5) NOT NULL,
   `file` varchar(150) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `tipe_file` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `soal` longtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
@@ -249,8 +254,13 @@ CREATE TABLE `tbl_soal` (
 -- Dumping data untuk tabel `tbl_soal`
 --
 
-INSERT INTO `tbl_soal` (`id`, `id_guru`, `id_mapel`, `bobot`, `file`, `tipe_file`, `soal`, `opsi_a`, `opsi_b`, `opsi_c`, `opsi_d`, `opsi_e`, `jawaban`, `tgl_input`, `jml_benar`, `jml_salah`) VALUES
-(6, 3, 25, 2, '', '', '<p>soal</p>\r\n', '#####<p>a</p>\r\n', '#####<p>b</p>\r\n', '#####<p>c</p>\r\n', '#####<p>d</p>\r\n', '#####<p>e</p>\r\n', 'A', '0000-00-00 00:00:00', 0, 0);
+INSERT INTO `tbl_soal` (`id`, `id_guru`, `id_mapel`, `kelas`, `file`, `tipe_file`, `soal`, `opsi_a`, `opsi_b`, `opsi_c`, `opsi_d`, `opsi_e`, `jawaban`, `tgl_input`, `jml_benar`, `jml_salah`) VALUES
+(10, '0001', 1, 'XI', '-', '-', '<p>SOAL</p>', '<p>A</p>', '<p>B</p>', '<p>C</p>', '<p>D</p>', '<p>E</p>', 'D', '2024-08-03 18:10:05', 0, 0),
+(9, '0001', 1, 'X', '-', '-', '<p>soal</p>', '<p>a</p>', '<p>b</p>', '<p>c</p>', '<p>d</p>', '<p>e</p>', 'E', '2024-08-03 18:06:28', 0, 0),
+(5, '0001', 7, 'XII', '-', '-', '<p>ini soal <strong>bahasa </strong><i><strong>inggris </strong></i><span style=\"color:hsl(30, 75%, 60%);\"><i><strong>??</strong></i></span>&nbsp;</p>', '<p>jawabann <span class=\"text-tiny\" style=\"font-family:\'Trebuchet MS\', Helvetica, sans-serif;\">A</span></p>', '<p>jawabann <span class=\"text-small\" style=\"font-family:Verdana, Geneva, sans-serif;\">A</span></p>', '<p>jawabann <span class=\"text-big\" style=\"font-family:Arial, Helvetica, sans-serif;\">A</span></p>', '<p>jawabann <span class=\"text-huge\" style=\"font-family:Verdana, Geneva, sans-serif;\">A</span></p>', '<p>jawabann E</p>', 'C', '2024-08-02 21:28:21', 0, 0),
+(6, '0001', 6, 'XI', '-', '-', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', 'B', '2024-08-02 22:42:40', 0, 0),
+(7, '0001', 5, 'X', '-', '-', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', 'E', '2024-08-02 22:44:51', 0, 0),
+(8, '0001', 6, 'XI', '-', '-', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', 'E', '2024-08-02 22:46:48', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -358,7 +368,8 @@ ALTER TABLE `tbl_siswa`
 ALTER TABLE `tbl_soal`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_guru` (`id_guru`),
-  ADD KEY `id_mapel` (`id_mapel`);
+  ADD KEY `id_mapel` (`id_mapel`),
+  ADD KEY `kelas` (`kelas`);
 
 --
 -- Indeks untuk tabel `tbl_user`
@@ -374,13 +385,13 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `tbl_guru_mapel`
 --
 ALTER TABLE `tbl_guru_mapel`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_guru_tes`
 --
 ALTER TABLE `tbl_guru_tes`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_ikut_ujian`
@@ -404,7 +415,7 @@ ALTER TABLE `tbl_mapel`
 -- AUTO_INCREMENT untuk tabel `tbl_soal`
 --
 ALTER TABLE `tbl_soal`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`
