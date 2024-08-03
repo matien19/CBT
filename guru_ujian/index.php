@@ -103,6 +103,7 @@ if (isset($_SESSION['peran'])) {
                               while ($data = mysqli_fetch_array($sql_tes)) {
                                 $id = $data['id'];
                                 $id_mapel = $data['id_mapel'];
+                                $kd_jurusan = $data['kode_jurusan'];
                                 ?>
                                 <tr>
                                   <td>
@@ -141,7 +142,12 @@ if (isset($_SESSION['peran'])) {
                                   <td>
                                     <center>
                                       <h6>
-                                        <?= $data['kelas'] . ' - ' . $data['jurusan']; ?>
+                                        <?php
+                                        $query_jurusan = "SELECT nama FROM tbl_jurusan WHERE kode_jurusan = '$kd_jurusan'";
+                                        $sql_jurusan = mysqli_query($con, $query_jurusan) or die(mysqli_error($con));
+                                        $data_jurusan = mysqli_fetch_array($sql_jurusan);
+                                        $jurusan = $data_jurusan['nama'];
+                                         echo $data['kelas'] . ' - ' . $jurusan; ?>
                                       </h6>
                                     </center>
                                   </td>
@@ -265,7 +271,7 @@ if (isset($_SESSION['peran'])) {
                         $sql_jurusan = mysqli_query($con, "SELECT * FROM tbl_jurusan") or die(mysqli_error($con));
                         while ($data_jurusan = mysqli_fetch_array($sql_jurusan)) {
                           ?>
-                          <option value="<?= $data_jurusan['nama']; ?>"><b> <?= $data_jurusan['kode_jurusan']; ?></b> - [
+                          <option value="<?= $data_jurusan['kode_jurusan']; ?>"><b> <?= $data_jurusan['kode_jurusan']; ?></b> - [
                             <?= $data_jurusan['nama']; ?> ]
                           </option>
                           <?php
