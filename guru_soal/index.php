@@ -58,9 +58,9 @@ include '../sidebar_guru.php';
                 </font>
                 <!-- /.card-header -->
                 <div class="card-body">
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-tambahdata" style="background-color:#86090f">
+                <a href="add.php" class="btn btn-danger" style="background-color:#86090f">
                 <i class="nav-icon fas fa-plus"></i>  Tambah Data
-                </button>
+                </a>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-importdata">
                   <i class="nav-icon fas fa-file-excel"></i> Import Data
                 </button>
@@ -71,20 +71,21 @@ include '../sidebar_guru.php';
                     <thead>
                     <tr>
                     <th>No</th>
-                    <th>NIP</th>
-                    <th>Nama</th>
+                    <th>Soal </th>
+                    <th>kelas - Mapel </th>
                     <th><center>Aksi</center></th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
                       $no = 1;
-                      $query = "SELECT * FROM tbl_guru";
-                      $sql_guru = mysqli_query($con, $query) or die (mysqli_error($con));
-                          if (mysqli_num_rows($sql_guru) > 0)
+                      $query = "SELECT * FROM tbl_soal";
+                      $sql_soal = mysqli_query($con, $query) or die (mysqli_error($con));
+                          if (mysqli_num_rows($sql_soal) > 0)
                           {
-                            while($data = mysqli_fetch_array($sql_guru))
+                            while($data = mysqli_fetch_array($sql_soal))
                             {
+                              $id_mapel = $data['id_mapel']; 
                                 ?>
                             <tr>
                                  <td>
@@ -93,33 +94,29 @@ include '../sidebar_guru.php';
 
                                   <td>
                                    <h6>
-                                   <?=$data['nip'];?>
+                                   <?=$data['soal'];?>
                                    </h6>  
                                   </td>
 
                                   <td>
                                    <h6>
-                                   <?=$data['nama'];?>
+                                    <?php 
+                                    $query_mapel = "SELECT nama FROM tbl_mapel WHERE id = '$id_mapel'";
+                                    $sql_mapel = mysqli_query($con, $query_mapel) or die (mysqli_error($con));
+                                    $data_mapel = mysqli_fetch_assoc($sql_mapel);
+                                    $mapel = $data_mapel['nama'];
+                                    echo $data['kelas'].' - '.$mapel;
+                                    ?>
                                    </h6>
                                  </td>
                                  
                                 <td>
                                   <center>
-                                <a href="resetpw.php?nip=<?= $data['nip']; ?>" class="btn btn-warning btn-sm" onclick="return confirm('Anda akan mereset password Dosen [ <?=$data['nip'] .' - '. $data['nama'];  ?> ]?')">
-                                  <i class="fas fa-edit"></i>
-                                   Reset Password
-                              </a> 
-                                  
+                               
                                 <button class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#modal-editdata" data-nip="<?=$data['nip'];?>" data-nama="<?=$data['nama'];?>">
                                   <i class="fas fa-edit"></i>
                                    Edit 
-                                </button> 
-                                   
-                                <button class="btn btn-success btn-sm"  data-toggle="modal" data-target="#modal-editmapel" data-nip="<?=$data['nip'];?>" data-nama="<?=$data['nama'];?>">
-                                  <i class="fas fa-clipboard-list"></i>
-                                   Input Mapel 
-                                </button> 
-                                   
+                                </button>    
                                 <a href="delete.php?nip=<?=$data['nip'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda akan menghapus Data Guru [ <?=$data['nip'] .' - '. $data['nama']; ?> ] ?')">
                                   <i class="fas fa-trash"></i>
                                    Hapus
@@ -168,129 +165,7 @@ include '../sidebar_guru.php';
 include "../footer.php";
 ?>
 
-<!-- modal tambah data -->
-<div class="modal fade" id="modal-tambahdata">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color:#86090f">
-              <h5 class="modal-title">
-              <font color="ffffff">
-              <i class="nav-icon fas fa-user"></i> 
-                Tambah Data Soal
-              </font>
-              </h5>
-              
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form class="form-horizontal" action="create.php" method="POST" >
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="nip">NIP</label>
-                <input type="number" name="nip" class="form-control"  placeholder="Masukan NIP">
-              </div>
-              <div class="form-group">
-                <label for="Nama">Nama</label>
-                <input type="text" name="nama" class="form-control" placeholder="Masukan Nama">
-              </div>
-             
-            </div>
-            <div class="modal-footer pull-right">
-              <button type="submit" class="btn btn-danger" name="tambahdata" style="background-color:#86090f"><i class="nav-icon fas fa-plus"></i>Tambah Data</button>
-              </form>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-</div>
-
-<!-- modal edit data mhs -->
-<div class="modal fade" id="modal-editdata">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color:#86090f">
-              <h5 class="modal-title">
-              <font color="ffffff">
-              <i class="nav-icon fas fa-edit"></i> 
-                Edit Data Soal
-              </font>
-
-              </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form class="form-horizontal" action="update.php" method="POST" >
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="nip">NIP</label>
-                <input type="number" name="nip" class="form-control"  disabled>
-                <input type="number" name="nip2" class="form-control" hidden >
-              </div>
-              <div class="form-group">
-                <label for="Nama">Nama</label>
-                <input type="text" name="nama" class="form-control" placeholder="Masukan Nama">
-              </div>
-            
-            </div>
-            <div class="modal-footer pull-right">
-              <button type="submit" class="btn btn-danger" name="editdata" style="background-color:#86090f"><i class="nav-icon fas fa-edit"></i>Edit Data</button>
-              </form>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-</div>
-      <!-- /.modal -->
-<!-- modal edit data mhs -->
-<div class="modal fade" id="modal-editmapel">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color:#86090f">
-              <h5 class="modal-title">
-              <font color="ffffff">
-              <i class="nav-icon fas fa-edit"></i> 
-                Input Data Mapel Guru
-              </font>
-
-              </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form class="form-horizontal" action="addmapel.php" method="POST" >
-            <div class="modal-body">
-            <input type="number" name="nip2" class="form-control" >
-
-              <div class="row">
-                <div class="col-lg-12">
-                <div class="d-flex flex-wrap justify-content-around">
-                    <div class="form-group">
-
-              </div>
-              </div>
-                </div>
-              </div>
-              
-             
-            </div>
-            <div class="modal-footer pull-right">
-              <button type="submit" class="btn btn-danger" name="addmapel" style="background-color:#86090f"><i class="nav-icon fas fa-edit"></i>Input Data</button>
-              </form>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-</div>
-      <!-- /.modal -->
-
-      <!-- modal import data mhs -->
+      <!-- modal import data Soal -->
 <div class="modal fade" id="modal-importdata">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -298,7 +173,7 @@ include "../footer.php";
               <h5 class="modal-title">
               <font color="ffffff">
               <i class="nav-icon fas fa-file-excel"></i> 
-                Import Data Guru
+                Import Data Soal
               </font>
 
               </h5>
@@ -333,35 +208,5 @@ include "../footer.php";
 <?php 
 include "../script.php";
 ?>
-
-<script type="text/javascript">
-$('#modal-editdata').on('show.bs.modal', function(e) {
-
-    //get data-id attribute of the clicked element
-     var nip          = $(e.relatedTarget).data('nip');
-     var nama         = $(e.relatedTarget).data('nama');
-     
-     $(e.currentTarget).find('input[name="nip"]').val(nip);
-     $(e.currentTarget).find('input[name="nip2"]').val(nip);
-     $(e.currentTarget).find('input[name="nama"]').val(nama);
-
-});
-</script>
-
-<script type="text/javascript">
-$('#modal-editmapel').on('show.bs.modal', function(e) {
-  var nip = $(e.relatedTarget).data('nip');
-
-  $.ajax({
-    type: 'POST',
-    url: 'fetch_mapel.php',
-    data: {nip: nip},
-    success: function(data) {
-      $('#modal-editmapel .modal-body').html(data);
-    }
-  });
-});
-</script>
-
 </body>
 </html>
