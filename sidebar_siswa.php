@@ -1,9 +1,17 @@
 
           <li class="nav-item">
-            <a href="../mhs_backend_dasbor" class="nav-link <?php if ($hal=='dasbor'){echo 'active';}?> ">
+            <a href="../siswa_dashboard" class="nav-link <?php if ($hal=='dasbor'){echo 'active';}?> ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="../siswa_ujian" class="nav-link <?php if($hal == 'ujian') { echo 'active';}?>">
+              <i class="nav-icon fas fa-book-open"></i>
+              <p>
+                Ujian
               </p>
             </a>
           </li>

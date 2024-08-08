@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Agu 2024 pada 18.52
+-- Waktu pembuatan: 08 Agu 2024 pada 13.54
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -102,7 +102,9 @@ CREATE TABLE `tbl_guru_tes` (
 INSERT INTO `tbl_guru_tes` (`id`, `id_guru`, `id_mapel`, `nama_ujian`, `jumlah_soal`, `kelas`, `kode_jurusan`, `waktu`, `jenis`, `tgl_mulai`, `terlambat`, `token`) VALUES
 (13, '0001', 1, 'UASsss', 11, 'XII', 'A003', 21, 'set', '2024-08-01 17:55:00', '2024-08-01 23:00:00', 'TFZNH'),
 (17, '0001', 6, 'UTS', 1, 'XI', 'A001', 2, 'set', '2024-07-23 12:15:00', '2024-07-23 12:15:00', 'DKGHN'),
-(20, '0001', 3, 'TESS', 1, 'X', 'A001', 2, 'set', '2024-08-22 19:57:00', '2024-08-30 19:57:00', 'JRYKC');
+(20, '0001', 3, 'TESS', 1, 'X', 'A001', 2, 'set', '2024-08-22 19:57:00', '2024-08-30 19:57:00', 'JRYKC'),
+(21, '0001', 1, 'UAS', 2, 'X', 'A001', 20, 'set', '2024-08-06 10:13:00', '2024-08-31 10:13:00', 'WBVSX'),
+(22, '0001', 3, 'UAS', 10, 'X', 'A003', 20, 'set', '2024-08-08 19:53:00', '2024-08-10 19:53:00', 'VUOAB');
 
 -- --------------------------------------------------------
 
@@ -222,7 +224,7 @@ INSERT INTO `tbl_siswa` (`nis`, `nama`, `kelas`, `kode_jurusan`, `stat`) VALUES
 ('42421067', 'Krisdianto', 'X', 'A001', 'A'),
 ('42421068', 'Lilis Suryani', 'X', 'A001', 'A'),
 ('42421069', 'M. Noval Najib', 'X', 'A001', 'A'),
-('42421070', 'M. Yusuf Al Qaradlawi', 'X', 'A001', 'A'),
+('42421070', 'M. Yusuf Al Qaradlawi', 'X', 'A001', 'T'),
 ('42421071', 'Matien Hakim Falahudin Bachtiar', 'X', 'A001', 'A');
 
 -- --------------------------------------------------------
@@ -286,7 +288,7 @@ INSERT INTO `tbl_user` (`id`, `username`, `password`, `peran`, `nama`, `aktivasi
 (2, 'matien', '8cb2237d0679ca88db6464eac60da96345513964', 'admin', 'matien', 'A'),
 (3, 'tien', '8cb2237d0679ca88db6464eac60da96345513964', 'admin', 'tien', 'A'),
 (54, '42421071', 'e81c3882d9ca22944a793c61dcbbe897', 'siswa', 'Matien Hakim Falahudin Bachtiar', 'A'),
-(53, '42421070', '3b504e4ec694a6dfc6398f882e5add6c', 'siswa', 'M. Yusuf Al Qaradlawi', 'A'),
+(53, '42421070', '3b504e4ec694a6dfc6398f882e5add6c', 'siswa', 'M. Yusuf Al Qaradlawi', 'T'),
 (52, '42421069', 'd6764c8d9c6d2c4c23e7aee9f4cdddc8', 'siswa', 'M. Noval Najib', 'A'),
 (51, '42421068', '75c1f590552b4b663c71d22e876d06df', 'siswa', 'Lilis Suryani', 'A'),
 (50, '42421067', '8e892c5b79e5d5af43f313cdd265f6ad', 'siswa', 'Krisdianto', 'A'),
@@ -391,7 +393,7 @@ ALTER TABLE `tbl_guru_mapel`
 -- AUTO_INCREMENT untuk tabel `tbl_guru_tes`
 --
 ALTER TABLE `tbl_guru_tes`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_ikut_ujian`
