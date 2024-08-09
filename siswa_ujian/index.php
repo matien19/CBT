@@ -140,57 +140,53 @@ if (isset($_SESSION['peran'])) {
                                   </td>
 
                                   <td>
-
                                     <h6>
                                       <?= date('d F Y  [H:i]', strtotime($data['tgl_mulai'])) . ' <br> ( ' . $data['waktu'] . ' menit )'; ?>
                                     </h6>
-
                                   </td>
 
-                                  <td>
-                                    <center>
+                                  <td align="center">
+                                    <?php
+                                    $status_ujian = '0';
+                                    $cek_ikut_ujian = mysqli_query($con, "SELECT id, status FROM tbl_ikut_ujian WHERE id_tes='".$data['id']."' AND id_user='".$_SESSION['user']."' ") or die(mysqli_error($con));
+                                    if(mysqli_num_rows($cek_ikut_ujian) > 0)
+                                    {
+                                      $data_ikut_ujian = mysqli_fetch_assoc($cek_ikut_ujian);
+                                      $status_ujian = $data_ikut_ujian['status'];
+                                    }
+
+                                    
+                                    if($status_ujian == 'selesai'){
+                                      echo '<button type="button" disabled class="btn btn-outline-info btn-flat"><i class="fas fa-check-circle"></i> Selesai Ujian</button>';
+                                    }
+                                    else{
+                                      ?>
                                       <a href="./ujian.php?id=<?= $id; ?>" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
                                         <i class="fas fa-edit"></i>
                                         Ikut Ujian
                                       </a>
-                                      
-
-                                    </center>
+                                    <?php } ?>
                                   </td>
-
                                 </tr>
-
                                 <?php
                               }
-
-                            } else {
+                            } 
+                            else {
                               echo "<tr><td colspan=\"7\" align=\"center\"><h6>Data Tidak Ditemukan!</h6></td></tr>";
                             }
-
                             ?>
-
                           </tbody>
-                          <tfoot>
-
-                          </tfoot>
                         </table>
                       </div>
-                      <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                   </div>
                 </div>
               </div>
-              <!-- /.container-fluid -->
             </div>
           </div>
-          <!-- /.content-wrapper -->
-
-          <!-- Control Sidebar -->
           <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
           </aside>
-          <!-- /.control-sidebar -->
 
           <!-- Main Footer -->
           <?php

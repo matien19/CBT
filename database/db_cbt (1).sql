@@ -27,6 +27,18 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `tbl_guru`
 --
 
+CREATE TABLE `tbl_jawaban` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`id_tes` INT(10) NOT NULL,
+	`id_user` INT(10) NOT NULL,
+	`id_soal` INT(10) NOT NULL,
+	`jawaban` VARCHAR(2) NOT NULL DEFAULT '' COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `id_tes` (`id_tes`) USING BTREE,
+	INDEX `id_user` (`id_user`) USING BTREE
+);
+
+
 CREATE TABLE `tbl_guru` (
   `nip` varchar(30) NOT NULL,
   `nama` varchar(100) NOT NULL
@@ -113,18 +125,20 @@ INSERT INTO `tbl_guru_tes` (`id`, `id_guru`, `id_mapel`, `nama_ujian`, `jumlah_s
 --
 
 CREATE TABLE `tbl_ikut_ujian` (
-  `id` int(6) NOT NULL,
-  `id_tes` int(6) NOT NULL,
-  `id_user` int(6) NOT NULL,
-  `list_soal` longtext NOT NULL,
-  `list_jawaban` longtext NOT NULL,
-  `jml_benar` int(6) NOT NULL,
-  `nilai` decimal(10,2) NOT NULL,
-  `nilai_bobot` decimal(10,2) NOT NULL,
-  `tgl_mulai` datetime NOT NULL,
-  `tgl_selesai` datetime NOT NULL,
-  `status` enum('Y','N') NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`id_tes` INT(10) NOT NULL,
+	`id_user` VARCHAR(50) NOT NULL DEFAULT '' COLLATE 'latin1_swedish_ci',
+	`jml_benar` INT(10) NULL DEFAULT '0',
+	`nilai` DECIMAL(10,2) NULL DEFAULT '0.00',
+	`tgl_mulai` DATETIME NOT NULL,
+	`tgl_selesai` DATETIME NULL DEFAULT NULL,
+	`status` ENUM('ujian','selesai') NULL DEFAULT 'ujian' COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `id_tes` (`id_tes`) USING BTREE,
+	INDEX `id_user` (`id_user`) USING BTREE
+)
+COLLATE='latin1_swedish_ci';
+
 
 -- --------------------------------------------------------
 

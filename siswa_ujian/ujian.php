@@ -8,6 +8,17 @@ if (isset($_SESSION['peran'])) {
 } else {
   echo "<script>window.location='../auth/logout.php';</script>";
 }
+
+
+$cek_ikut_ujian = mysqli_query($con, "SELECT * FROM tbl_ikut_ujian WHERE id_tes='".$_GET['id']."' AND id_user='".$_SESSION['user']."' ") or die(mysqli_error($con));
+if(mysqli_num_rows($cek_ikut_ujian) > 0)
+{
+  $data_ikut_ujian = mysqli_fetch_assoc($cek_ikut_ujian);
+  
+  if($data_ikut_ujian['status'] == 'selesai'){
+    header('Location: '. 'index.php?id='.$_GET['id']); 
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +37,7 @@ if (isset($_SESSION['peran'])) {
 
   <?php
   $id = $_GET['id'];
-  $quey_tes = "SELECT a.id_guru, a.tgl_mulai, a.terlambat, a.token, a.nama_ujian, a.jumlah_soal, a.waktu, b.nama AS nama_guru, c.nama AS nama_mapel, CASE
+  $quey_tes = "SELECT a.id AS id_tes_token, a.id_guru, a.tgl_mulai, a.terlambat, a.token, a.nama_ujian, a.jumlah_soal, a.waktu, b.nama AS nama_guru, c.nama AS nama_mapel, CASE
   WHEN NOW() < a.tgl_mulai THEN 0 
   WHEN NOW() BETWEEN a.tgl_mulai AND a.terlambat THEN 1 
   ELSE 2 END AS statuse 
@@ -43,7 +54,7 @@ if (isset($_SESSION['peran'])) {
   $data_siswa = mysqli_fetch_assoc($sql_siswa);
   if ($status == 2){
     echo '
-    <button class="alert alert-warning"> Jadwal Tes di muai pada tanggal <strong>'.  $data['tgl_mulai'].' 
+    <button class="alert alert-warning"> Jadwal Tes di muai pada tanggal <strong>'.  date('d M Y - H:i', strtotime($data['tgl_mulai'])).' 
     </strong></button>';
   } 
   ?>
@@ -60,14 +71,6 @@ if (isset($_SESSION['peran'])) {
             </div>
             </font>
             <div class="card-body">
-              
-            
-              <input type="hidden" name="id_ujian" id="id_ujian" value="<?php echo $id; ?>">
-              <input type="hidden" name="_token" id="_token" value="<?php echo $data['token']; ?>">
-              <input type="hidden" name="_tgl_sekarang" id="_tgl_sekarang" value="<?php echo date('Y-m-d H:i:s'); ?>">
-              <input type="hidden" name="_tgl_mulai" id="_tgl_mulai" value="<?php echo $data['tgl_mulai']; ?>">
-              <input type="hidden" name="_terlambat" id="_terlambat" value="<?php echo $data['terlambat']; ?>">
-              <input type="hidden" name="_statuse" id="_statuse" value="<?php echo $status; ?>">
               <div class="row">
                 <div class="col-md-7">
                 <a href="../siswa_ujian/" class="btn btn-danger btn-sm"> <i class=""></i> <strong> kembali </strong> </a>
@@ -101,7 +104,7 @@ if (isset($_SESSION['peran'])) {
                         </tr>
                         <tr>
                           <td>TOKEN</td>
-                          <td><input type="text" name="token" id="token" required="true" class="form-control col-md-3"></td>
+                          <td><input type="text" name="token" id="token_ujian" required="true" class="form-control col-md-3"></td>
                         </tr>
                       </table>
                     </div>
@@ -119,11 +122,10 @@ if (isset($_SESSION['peran'])) {
                       <?php 
                       if ($status == 0){
                         echo '
-                        <button class="alert alert-warning"> Jadwal Tes di muai pada tanggal <strong>'.  $data['tgl_mulai'].' 
+                        <button class="alert alert-warning"> Jadwal Tes di muai pada tanggal <strong>'.  date('d M Y - H:i', strtotime($data['tgl_mulai'])).' 
                         </strong></button>';
                       } else if ($status == 1){
-                        echo '
-                        <button class="btn btn-success btn-lg">  <strong> mulai </strong>  </button>';
+                        echo '<button onclick="mulai_ujian()" class="btn btn-success btn-lg">  <strong> mulai </strong>  </button>';
                       }
                       
                     
@@ -132,15 +134,23 @@ if (isset($_SESSION['peran'])) {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </div>
   </div>
+  <script>
+    function mulai_ujian()
+    {
+      if(confirm('Anda yakin ingin memulai ujian ini?'))
+      {
+        var token = $('#token_ujian').val();
+        window.location="proses.php?proses=mulai_ujian&token="+token+"&id_tes=<?= $data['id_tes_token'] ?>"
+      }
+    }
+  </script>
 
   
 
