@@ -13,10 +13,9 @@ require_once "../database/config.php";
       mysqli_query($con, "UPDATE tbl_user SET password='$pass' WHERE username = '$nip'") or die (mysqli_error($con));
     ?>
   <!-- /.sweetalert -->
-  <script src="../assets_adminlte/js/sweetalert2.js"></script>
 <script src="../assets_adminlte/js/sweetalert.js"></script>
 <script>
-  swal("Berhasil", "Data Guru telah direset", "success");
+  swal("Berhasil", "Reset password guru telah berhasil", "success");
   
   setTimeout(function(){ 
    window.location.href = "../admin_guru";

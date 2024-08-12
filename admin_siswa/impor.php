@@ -26,15 +26,15 @@ error_reporting(0);
 
         for ($j=2; $j <= count($data_excel); $j++)
         {
-       $nis       = $data_excel[$j]['B'];
-       $nama      = addslashes($data_excel[$j]['C']);
-       $kelas      = $data_excel[$j]['D'];
-       $jurusan   = $data_excel[$j]['E'];
-       $stat      = 'T';
-       $pass      = md5($nis);
-       $peran     = 'siswa';
-       $kosong = '';
-    
+        $nis       = $data_excel[$j]['B'];
+        $nama      = addslashes($data_excel[$j]['C']);
+        $kelas      = $data_excel[$j]['D'];
+        $jurusan   = $data_excel[$j]['E'];
+        $stat      = 'T';
+        $pass      = md5($nis);
+        $peran     = 'siswa';
+        $kosong = '';
+           
        $query_chek = mysqli_query($con, "SELECT nis FROM tbl_siswa WHERE nis = '$nis'") or die(mysqli_error($con));  
        if (mysqli_num_rows($query_chek) == 0){
 
@@ -47,8 +47,8 @@ error_reporting(0);
           mysqli_query($con, "INSERT INTO tbl_user VALUES ('','$nis','$pass','$peran','$nama','$stat')") or die(mysqli_error($con)); 
           mysqli_query($con, "DELETE FROM tbl_user WHERE username = '$kosong'") or die(mysqli_error($con)); 
 
-         }
-        }
+            }
+          }
         }
     
         unlink($target_file);
@@ -57,7 +57,6 @@ error_reporting(0);
     ?>
 
   <!-- /.sweetalert -->
-  <script src="../assets_adminlte/js/sweetalert2.js"></script>
 <script src="../assets_adminlte/js/sweetalert.js"></script>
 <script>
   swal("Berhasil", "Import Data Siswa telah berhasil", "success");

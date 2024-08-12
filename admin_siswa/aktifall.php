@@ -17,10 +17,9 @@ require_once "../database/config.php";
     ?>
 
   <!-- /.sweetalert -->
-  <script src="../assets_adminlte/js/sweetalert2.js"></script>
 <script src="../assets_adminlte/js/sweetalert.js"></script>
 <script>
-  swal("Berhasil", "Data Siswa telah diaktifkan", "success");
+  swal("Berhasil", "Semua data siswa telah diaktifkan", "success");
   
   setTimeout(function(){ 
    window.location.href = "../admin_siswa";

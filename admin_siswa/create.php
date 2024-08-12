@@ -15,25 +15,26 @@ require_once "../database/config.php";
     {
       
       $nis      = trim(mysqli_real_escape_string($con, $_POST['nis']));
-      $nama   = trim(mysqli_real_escape_string($con, $_POST['nama']));
-      $kelas   = trim(mysqli_real_escape_string($con, $_POST['kelas']));
-      $jurusan   = trim(mysqli_real_escape_string($con, $_POST['jurusan']));
+      $nama     = trim(mysqli_real_escape_string($con, $_POST['nama']));
+      $kelas    = trim(mysqli_real_escape_string($con, $_POST['kelas']));
+      $jurusan  = trim(mysqli_real_escape_string($con, $_POST['jurusan']));
       $status   = 'T';
-      $pass = md5($nis);
-      $peran = 'siswa';
+      $pass     = md5($nis);
+      $peran    = 'siswa';
 
       $querycek   =  mysqli_query($con, "SELECT * FROM tbl_siswa WHERE nis ='$nis'") or die (mysqli_error($con));
 
        if (mysqli_num_rows($querycek) > 0)
        {
            echo '
-        <script>
-            swal("Error", "NIM sudah digunakan / data sudah ada!", "warning");
-            setTimeout(function(){ 
-            window.location.href = "../admin_siswa";
-            }, 2000);
-        </script>
-        ';
+           <script>
+                swal("Error!", "NIM sudah digunakan / data sudah ada!", "warning");
+                
+                setTimeout(function(){ 
+                window.location.href = "../admin_siswa";
+                }, 2000);
+            </script>
+            ';
        }
       else
        {
@@ -41,15 +42,15 @@ require_once "../database/config.php";
            mysqli_query($con, "INSERT INTO tbl_user VALUES ('','$nis','$pass','$peran','$nama','$status')") or die (mysqli_error($con));
 
            echo '
-               <script>
-              swal("Berhasil", "Data Siswa telah ditambahkan", "success");
-              
-              setTimeout(function(){ 
-              window.location.href = "../admin_siswa";
+            <script>
+                swal("Berhasil", "Data Siswa telah ditambahkan", "success");
+                
+                setTimeout(function(){ 
+                window.location.href = "../admin_siswa";
 
-              }, 1000);
+                }, 1000);
             </script>
-           ';
+            ';
        }
           
     }

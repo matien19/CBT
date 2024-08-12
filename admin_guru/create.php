@@ -16,40 +16,43 @@ require_once "../database/config.php";
     {
       
       $nip      = trim(mysqli_real_escape_string($con, $_POST['nip']));
-      $nama   = trim(mysqli_real_escape_string($con, $_POST['nama']));
-      $encpass = $nip;
-      $pass = md5($encpass);
-      $peran = 'guru';
-      $aktif = 'A';
+      $nama     = trim(mysqli_real_escape_string($con, $_POST['nama']));
+      $encpass  = $nip;
+      $pass     = md5($encpass);
+      $peran    = 'guru';
+      $aktif    = 'A';
 
-      $querycek   =  mysqli_query($con, "SELECT * FROM tbl_guru WHERE nip ='$nip'") or die (mysqli_error($con));
+      $querycek  =  mysqli_query($con, "SELECT * FROM tbl_guru WHERE nip ='$nip'") or die (mysqli_error($con));
 
        if (mysqli_num_rows($querycek) > 0)
        {
         echo '
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script>
-            swal("Error", "NIP sudah digunakan / data sudah ada!", "warning");
-            setTimeout(function(){ 
-            window.location.href = "../admin_guru";
-            }, 2000);
-        </script>
-        ';
+        <script src="../assets_adminlte/js/sweetalert.js"></script>
+          <script>
+          swal("Error!", "NIP sudah digunakan / data sudah ada!", "warning");
+          
+          setTimeout(function(){ 
+          window.location.href = "../admin_guru";
+
+          }, 2000)
+       </script>';
+        
        }
       else
        {
-           mysqli_query($con, "INSERT INTO tbl_guru VALUES ('$nip','$nama')") or die (mysqli_error($con));
-           mysqli_query($con, "INSERT INTO tbl_user VALUES ('','$nip','$pass','$peran','$nama','$aktif')") or die (mysqli_error($con));
+        mysqli_query($con, "INSERT INTO tbl_guru VALUES ('$nip','$nama')") or die (mysqli_error($con));
+        mysqli_query($con, "INSERT INTO tbl_user VALUES ('','$nip','$pass','$peran','$nama','$aktif')") or die (mysqli_error($con));
 
-           echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-                  <script>
-                    swal("Berhasil", "Data Guru telah ditambahkan", "success");
-                    
-                    setTimeout(function(){ 
-                    window.location.href = "../admin_guru";
+        echo '
+          <script src="../assets_adminlte/js/sweetalert.js"></script>
+          <script>
+            swal("Berhasil", "Data Guru telah ditambahkan", "success");
+            
+            setTimeout(function(){ 
+            window.location.href = "../admin_guru";
 
-                    }, 1000)
-                  </script>';
+            }, 1000)
+          </script>';
        }
           
     }

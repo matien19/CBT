@@ -21,7 +21,6 @@ require_once "../database/config.php";
       
     ?>
       <!-- /.sweetalert -->
-<script src="../assets_adminlte/js/sweetalert2.js"></script>
 <script src="../assets_adminlte/js/sweetalert.js"></script>
 <script>
   swal("Berhasil", "Data Guru telah diedit", "success");

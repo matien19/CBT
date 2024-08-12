@@ -12,7 +12,7 @@ require_once "../database/config.php";
     
       
         $nis         = @$_GET['nis'];
-        $aktif      = 'A';
+        $aktif       = 'A';
 
         mysqli_query($con, "UPDATE tbl_siswa SET stat='$aktif' WHERE nis = '$nis'") or die (mysqli_error($con));
         mysqli_query($con, "UPDATE tbl_user SET aktivasi='$aktif' WHERE username = '$nis'") or die (mysqli_error($con));
@@ -20,7 +20,6 @@ require_once "../database/config.php";
     ?>
 
   <!-- /.sweetalert -->
-  <script src="../assets_adminlte/js/sweetalert2.js"></script>
 <script src="../assets_adminlte/js/sweetalert.js"></script>
 <script>
   swal("Berhasil", "Data Siswa telah diaktifkan", "success");

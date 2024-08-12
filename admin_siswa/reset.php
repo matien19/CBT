@@ -14,10 +14,9 @@ require_once "../database/config.php";
     ?>
 
   <!-- /.sweetalert -->
-  <script src="../assets_adminlte/js/sweetalert2.js"></script>
 <script src="../assets_adminlte/js/sweetalert.js"></script>
 <script>
-  swal("Berhasil", "Data Siswa telah direset", "success");
+  swal("Berhasil", "Reset password siswa telah berhasil", "success");
   
   setTimeout(function(){ 
    window.location.href = "../admin_siswa";
