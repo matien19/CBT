@@ -44,7 +44,7 @@ error_reporting(0);
          $query_pengguna = mysqli_query($con, "SELECT username FROM tbl_user WHERE username='$nis'") or die(mysqli_error($con));
          
          if (mysqli_num_rows($query_pengguna) == 0){
-          mysqli_query($con, "INSERT INTO tbl_user VALUES ('','$nis','$pass','$peran','$nama','$stat')") or die(mysqli_error($con)); 
+          mysqli_query($con, "INSERT INTO tbl_user VALUES (NULL,'$nis','$pass','$peran','$nama','$stat')") or die(mysqli_error($con)); 
           mysqli_query($con, "DELETE FROM tbl_user WHERE username = '$kosong'") or die(mysqli_error($con)); 
 
             }

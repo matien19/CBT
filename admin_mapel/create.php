@@ -35,7 +35,7 @@ require_once "../database/config.php";
        }
       else
        {
-           mysqli_query($con, "INSERT INTO tbl_mapel VALUES ('','$mapel')") or die (mysqli_error($con));
+           mysqli_query($con, "INSERT INTO tbl_mapel VALUES (NULL,'$mapel')") or die (mysqli_error($con));
            echo '
            
             <script>

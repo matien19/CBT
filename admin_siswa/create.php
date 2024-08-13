@@ -39,7 +39,7 @@ require_once "../database/config.php";
       else
        {
            mysqli_query($con, "INSERT INTO tbl_siswa VALUES ('$nis','$nama','$kelas','$jurusan','$status')") or die (mysqli_error($con));
-           mysqli_query($con, "INSERT INTO tbl_user VALUES ('','$nis','$pass','$peran','$nama','$status')") or die (mysqli_error($con));
+           mysqli_query($con, "INSERT INTO tbl_user VALUES (NULL,'$nis','$pass','$peran','$nama','$status')") or die (mysqli_error($con));
 
            echo '
             <script>
