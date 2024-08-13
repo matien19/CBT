@@ -35,7 +35,7 @@ require_once "../database/config.php";
         $nama         = trim(mysqli_real_escape_string($con, $_POST['nama']));
         $peran        = 'admin';
         
-        mysqli_query($con, "INSERT INTO tbl_user VALUES ('','$usernamefix','$pass','$peran','$nama','$aktivasi')") or die (mysqli_error($con));
+        mysqli_query($con, "INSERT INTO tbl_user VALUES (NULL,'$usernamefix','$pass','$peran','$nama','$aktivasi')") or die (mysqli_error($con));
         
         echo '
         

@@ -41,7 +41,7 @@ require_once "../database/config.php";
       else
        {
         mysqli_query($con, "INSERT INTO tbl_guru VALUES ('$nip','$nama')") or die (mysqli_error($con));
-        mysqli_query($con, "INSERT INTO tbl_user VALUES ('','$nip','$pass','$peran','$nama','$aktif')") or die (mysqli_error($con));
+        mysqli_query($con, "INSERT INTO tbl_user VALUES (NULL,'$nip','$pass','$peran','$nama','$aktif')") or die (mysqli_error($con));
 
         echo '
           <script src="../assets_adminlte/js/sweetalert.js"></script>

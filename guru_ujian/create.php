@@ -33,7 +33,7 @@ require_once "../database/config.php";
 
       $token = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
 
-          mysqli_query($con, "INSERT INTO tbl_guru_tes VALUES ('', '$id_guru','$id_mapel','$kelas','$nama_ujian','$jml_soal','$jurusan','$waktu','$jenis','$mulai','$terlambat','$token')") or die (mysqli_error($con));
+          mysqli_query($con, "INSERT INTO tbl_guru_tes VALUES (NULL, '$id_guru','$id_mapel','$kelas','$nama_ujian','$jml_soal','$jurusan','$waktu','$jenis','$mulai','$terlambat','$token')") or die (mysqli_error($con));
          
           echo '
               <script>

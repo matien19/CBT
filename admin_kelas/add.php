@@ -35,7 +35,7 @@ require_once "../database/config.php";
        }
       else
        {
-           mysqli_query($con, "INSERT INTO tbl_kelas VALUES ('','$kelas')") or die (mysqli_error($con));
+           mysqli_query($con, "INSERT INTO tbl_kelas VALUES (NULL,'$kelas')") or die (mysqli_error($con));
            echo '
            
             <script>
