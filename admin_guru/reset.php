@@ -10,6 +10,7 @@ require_once "../database/config.php";
   <?php
       $peran = 'guru';
       mysqli_query($con, "TRUNCATE TABLE tbl_guru") or die (mysqli_error($con));
+      mysqli_query($con, "TRUNCATE TABLE tbl_guru_mapel") or die (mysqli_error($con));
       mysqli_query($con, "DELETE from tbl_user WHERE peran='$peran'") or die (mysqli_error($con));
     ?>
 
