@@ -229,12 +229,10 @@ if(isset($_POST['tambahdata'])) {
   $file      = '-';
   $type_file = '-';
   $date      = date('Y-m-d H:i:s');
-  $benar     = 0;
-  $salah     = 0;
 
  
   // Simpan data ke database (tambah query insert di sini)
-  $sql       = "INSERT INTO tbl_soal VALUES ('','$nip','$mapel', '$kelas','$file','$type_file', '$soal', '$jawaban_a', '$jawaban_b', '$jawaban_c', '$jawaban_d', '$jawaban_e', '$kunci_jawaban','$date','$benar','$salah')";
+  $sql       = "INSERT INTO tbl_soal VALUES (null,'$nip','$mapel', '$kelas','$file','$type_file', '$soal', '$jawaban_a', '$jawaban_b', '$jawaban_c', '$jawaban_d', '$jawaban_e', '$kunci_jawaban', '$date')";
   
   if(mysqli_query($con, $sql)) {
     echo '

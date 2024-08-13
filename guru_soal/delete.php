@@ -9,18 +9,17 @@ require_once "../database/config.php";
 <div class="wrapper" style="zoom:90%" !important>
   <?php
       
-      $nip = @$_GET['nip'];
-      mysqli_query($con, "DELETE FROM tbl_guru WHERE nip='$nip'") or die (mysqli_error($con));
+      $id = @$_GET['id'];
+      mysqli_query($con, "DELETE FROM tbl_soal WHERE id='$id'") or die (mysqli_error($con));
     ?>
 
   <!-- /.sweetalert -->
-  <script src="../assets_adminlte/js/sweetalert2.js"></script>
 <script src="../assets_adminlte/js/sweetalert.js"></script>
 <script>
-  swal("Berhasil", "Data Guru telah dihapus", "success");
+  swal("Berhasil", "Data soal telah dihapus", "success");
   
   setTimeout(function(){ 
-   window.location.href = "../admin_guru";
+   window.location.href = "../guru_soal";
 
   }, 1000);
 </script> 

@@ -61,10 +61,7 @@ include '../sidebar_guru.php';
                 <a href="add.php" class="btn btn-danger" style="background-color:#86090f">
                 <i class="nav-icon fas fa-plus"></i>  Tambah Data
                 </a>
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-importdata">
-                  <i class="nav-icon fas fa-file-excel"></i> Import Data
-                </button>
-                 <a href="reset.php" class="btn btn-danger" onclick="return confirm('Anda akan menghapus seluruh data Guru ?')">
+                 <a href="reset.php" class="btn btn-danger" onclick="return confirm('Anda akan menghapus seluruh data soal ?')">
                   <i class="nav-icon fas fa-times"></i> Reset Data
                 </a>
                   <table id="example1" class="table table-bordered table-striped table-sm">
@@ -79,13 +76,12 @@ include '../sidebar_guru.php';
                     <tbody>
                     <?php
                       $no = 1;
-                      $query = "SELECT * FROM tbl_soal";
+                      $query = "SELECT a.id, a.id_guru AS nip, a.kelas, a.soal, b.nama FROM tbl_soal AS a INNER JOIN tbl_mapel AS b ON a.id_mapel = b.id";
                       $sql_soal = mysqli_query($con, $query) or die (mysqli_error($con));
                           if (mysqli_num_rows($sql_soal) > 0)
                           {
                             while($data = mysqli_fetch_array($sql_soal))
                             {
-                              $id_mapel = $data['id_mapel']; 
                                 ?>
                             <tr>
                                  <td>
@@ -101,10 +97,7 @@ include '../sidebar_guru.php';
                                   <td>
                                    <h6>
                                     <?php 
-                                    $query_mapel = "SELECT nama FROM tbl_mapel WHERE id = '$id_mapel'";
-                                    $sql_mapel = mysqli_query($con, $query_mapel) or die (mysqli_error($con));
-                                    $data_mapel = mysqli_fetch_assoc($sql_mapel);
-                                    $mapel = $data_mapel['nama'];
+                                    $mapel = $data['nama'];
                                     echo $data['kelas'].' - '.$mapel;
                                     ?>
                                    </h6>
@@ -113,11 +106,11 @@ include '../sidebar_guru.php';
                                 <td>
                                   <center>
                                
-                                <button class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#modal-editdata" data-nip="<?=$data['nip'];?>" data-nama="<?=$data['nama'];?>">
+                                <a href="update.php?id=<?=$data['id'];?>" class="btn btn-primary btn-sm">
                                   <i class="fas fa-edit"></i>
                                    Edit 
-                                </button>    
-                                <a href="delete.php?nip=<?=$data['nip'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda akan menghapus Data Guru [ <?=$data['nip'] .' - '. $data['nama']; ?> ] ?')">
+                                </a>    
+                                <a href="delete.php?id=<?=$data['id'];?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda akan menghapus Data Soal ?')">
                                   <i class="fas fa-trash"></i>
                                    Hapus
                               </a> 
@@ -132,7 +125,7 @@ include '../sidebar_guru.php';
                         }
                         else
                         {
-                          echo "<tr><td colspan=\"8\" align=\"center\"><h6>Data Tidak Ditemukan!</h6></td></tr>";
+                          echo "<tr><td colspan=\"4\" align=\"center\"><h6>Data Tidak Ditemukan!</h6></td></tr>";
                         }
 
                           ?>

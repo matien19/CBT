@@ -96,14 +96,18 @@ if (isset($_SESSION['peran'])) {
                             <?php
                             $no = 1;
                             $nip = $_SESSION['user'];
-                            $quey_tes = "SELECT * FROM tbl_guru_tes WHERE id_guru = '$nip'";
+                            $quey_tes = "SELECT a.id, a.id_mapel, a.kelas, a.nama_ujian, a.kode_jurusan, a.jumlah_soal, a.waktu, a.token, a.tgl_mulai, a.terlambat,
+                            b.nip, b.nama AS guru, c.nama AS mapel, d.nama AS jurusan
+                            FROM tbl_guru_tes AS a INNER JOIN tbl_guru AS b ON a.id_guru = b.nip 
+                            INNER JOIN tbl_mapel AS c ON a.id_mapel = c.id 
+                            INNER JOIN tbl_jurusan AS d ON a.kode_jurusan = d.kode_jurusan
+                            WHERE a.id_guru = '$nip'";
                             $sql_tes = mysqli_query($con, $quey_tes) or die(mysqli_error($con));
                             $row_db = mysqli_num_rows($sql_tes);
                             if ($row_db > 0) {
                               while ($data = mysqli_fetch_array($sql_tes)) {
                                 $id = $data['id'];
                                 $id_mapel = $data['id_mapel'];
-                                $kd_jurusan = $data['kode_jurusan'];
                                 ?>
                                 <tr>
                                   <td>
@@ -122,13 +126,9 @@ if (isset($_SESSION['peran'])) {
                                   </td>
                                   <td>
                                     <?php
-                                    $query_mapel = "SELECT * FROM tbl_mapel WHERE id = '$id_mapel'";
-                                    $sql_mapel = mysqli_query($con, $query_mapel) or die(mysqli_error($con));
-                                    $data_mapel = mysqli_fetch_array($sql_mapel);
-                                    $mapel = $data_mapel['nama'];
                                     ?>
                                     <h6>
-                                      <?= $mapel; ?>
+                                      <?= $data['mapel'];; ?>
                                     </h6>
                                   </td>
                                   <td>
@@ -143,11 +143,7 @@ if (isset($_SESSION['peran'])) {
                                     <center>
                                       <h6>
                                         <?php
-                                        $query_jurusan = "SELECT nama FROM tbl_jurusan WHERE kode_jurusan = '$kd_jurusan'";
-                                        $sql_jurusan = mysqli_query($con, $query_jurusan) or die(mysqli_error($con));
-                                        $data_jurusan = mysqli_fetch_array($sql_jurusan);
-                                        $jurusan = $data_jurusan['nama'];
-                                         echo $data['kelas'] . ' - ' . $jurusan; ?>
+                                         echo $data['kelas'] . ' - ' . $data['jurusan']; ?>
                                       </h6>
                                     </center>
                                   </td>
@@ -163,7 +159,7 @@ if (isset($_SESSION['peran'])) {
                                   <td>
                                     <center>
                                       <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#modal-editdata" data-id="<?= $id; ?>" data-nip="<?= $data['nip']; ?>" data-nama="<?= $data['nama_ujian']; ?>" data-mapel="<?= $id_mapel; ?>" data-kelas="<?= $data['kelas']; ?>" data-jurusan="<?= $data['jurusan']; ?>" data-jumlah="<?= $data['jumlah_soal'];  ?>" data-mulai="<?= $data['tgl_mulai']; ?>" data-terlambat="<?= $data['terlambat']; ?>"  data-waktu="<?= $data['waktu']; ?>" >
+                                        data-target="#modal-editdata" data-id="<?= $id; ?>" data-nip="<?= $data['nip']; ?>" data-nama="<?= $data['nama_ujian']; ?>" data-mapel="<?= $id_mapel; ?>" data-kelas="<?= $data['kelas']; ?>" data-jurusan="<?= $data['kode_jurusan']; ?>" data-jumlah="<?= $data['jumlah_soal'];  ?>" data-mulai="<?= $data['tgl_mulai']; ?>" data-terlambat="<?= $data['terlambat']; ?>"  data-waktu="<?= $data['waktu']; ?>" >
                                         <i class="fas fa-edit"></i>
                                         Edit
                                       </button>
@@ -223,7 +219,7 @@ if (isset($_SESSION['peran'])) {
                   <h5 class="modal-title">
                     <font color="ffffff">
                       <i class="nav-icon fas fa-plus"></i>
-                      Tambah Data Ujian
+                      Edit Data Soal
                     </font>
                   </h5>
 
@@ -377,7 +373,7 @@ if (isset($_SESSION['peran'])) {
                   $sql_jurusan = mysqli_query($con, "SELECT * FROM tbl_jurusan") or die(mysqli_error($con));
                   while ($data_jurusan = mysqli_fetch_array($sql_jurusan)) {
                     ?>
-                    <option value="<?= $data_jurusan['nama']; ?>"><b> <?= $data_jurusan['kode_jurusan']; ?></b> - [
+                    <option value="<?= $data_jurusan['kode_jurusan']; ?>"><b> <?= $data_jurusan['kode_jurusan']; ?></b> - [
                       <?= $data_jurusan['nama']; ?> ]
                     </option>
                     <?php
@@ -449,7 +445,7 @@ if (isset($_SESSION['peran'])) {
       var tglMulaiTime  = tglMulai.split(' ')[1];
       var terlambatDate = terlambat.split(' ')[0];
       var terlambatTime = terlambat.split(' ')[1];
-        
+      console.log(jurusan);
 
       $(e.currentTarget).find('input[name="id"]').val(id);
       $(e.currentTarget).find('input[name="nip"]').val(nip);

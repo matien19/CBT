@@ -15,6 +15,7 @@ require_once "../database/config.php";
     if (isset($_POST['editdata']))
     {
       $id            = trim(mysqli_real_escape_string($con, $_POST['id']));
+      $id_guru       = trim(mysqli_real_escape_string($con, $_POST['nip']));
       $id_mapel      = trim(mysqli_real_escape_string($con, $_POST['mapel']));
       $nama_ujian    = trim(mysqli_real_escape_string($con, $_POST['nama']));
       $jml_soal      = trim(mysqli_real_escape_string($con, $_POST['soal']));
@@ -33,19 +34,37 @@ require_once "../database/config.php";
 
       $token = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
 
-      // echo $id.'-'.$id_mapel.'-'.$nama_ujian.'-'.$jml_soal.'-'.$waktu.'-'.$jenis.'-'.$mulai.'-'.$terlambat.'-'.$token;
-          mysqli_query($con, "UPDATE tbl_guru_tes SET id_mapel='$id_mapel', nama_ujian='$nama_ujian', jumlah_soal='$jml_soal', kelas='$kelas', jurusan='$jurusan', waktu='$waktu',jenis='$jenis', tgl_mulai='$mulai', terlambat='$terlambat', token='$token' WHERE id='$id'") or die (mysqli_error($con));
+      // echo $id.'-'.$id_guru.'-'.$id_mapel.'-'.$nama_ujian.'-'.$jml_soal.'-'.$kelas.'-'.$jurusan.'-'.$waktu.'-'.$jenis.'-'.$mulai.'-'.$terlambat;
+        $sql =  mysqli_query($con, "UPDATE tbl_guru_tes 
+        SET id_guru='$id_guru', 
+        id_mapel='$id_mapel', 
+        nama_ujian='$nama_ujian', 
+        jumlah_soal='$jml_soal', 
+        kelas='$kelas', 
+        kode_jurusan='$jurusan', 
+        waktu='$waktu',
+        jenis='$jenis', 
+        tgl_mulai='$mulai', 
+        terlambat='$terlambat', 
+        token='$token' 
+        WHERE id='$id'") or die (mysqli_error($con));
          
+        if ($sql) {
           echo '
-              <script>
-             swal("Berhasil", "Data Ujian telah ditambahkan", "success");
-             
-             setTimeout(function(){ 
-             window.location.href = "../guru_ujian";
+          <script>
+         swal("Berhasil", "Data Ujian telah berhasil diedit", "success");
+         
+         setTimeout(function(){ 
+         window.location.href = "../guru_ujian";
 
-             }, 1000);
-           </script>
-          ';
+         }, 1000);
+       </script>
+      ';
+        } else {
+        echo mysqli_error($con);
+
+        }
+         
       }
         
     ?>
