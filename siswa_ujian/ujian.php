@@ -26,7 +26,7 @@ if(mysqli_num_rows($cek_ikut_ujian) > 0)
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Guru Panel | Ujian</title>
+  <title>Siswa Panel | Ujian</title>
 
   <?php 
   include "../linksheet.php"; 
@@ -54,9 +54,16 @@ if(mysqli_num_rows($cek_ikut_ujian) > 0)
   $data_siswa = mysqli_fetch_assoc($sql_siswa);
   if ($status == 2){
     echo '
-    <button class="alert alert-warning"> Jadwal Tes di muai pada tanggal <strong>'.  date('d M Y - H:i', strtotime($data['tgl_mulai'])).' 
-    </strong></button>';
-  } 
+    <script src="../assets_adminlte/js/sweetalert.js"></script>
+    <script>
+      swal("Peringatan!", "Anda sudah terlambat untuk mengikuti Ujian ini", "warning");
+      
+      setTimeout(function(){ 
+      window.location.href = "../siswa_ujian";
+
+      }, 1000);
+    </script> ';
+  } else {
   ?>
 
   <div class="content">
@@ -72,11 +79,18 @@ if(mysqli_num_rows($cek_ikut_ujian) > 0)
             </font>
             <div class="card-body">
               <div class="row">
-                <div class="col-md-7">
-                <a href="../siswa_ujian/" class="btn btn-danger btn-sm"> <i class=""></i> <strong> kembali </strong> </a>
+                <div class="col-md-12">
+                  <a href="../siswa_ujian/" class="btn btn-danger btn-sm"> <i class="fas fa-arrow-alt-circle-left"></i> <strong> kembali </strong> </a>
+                </div>
                 <br>
+                <br>
+              </div>
+              <div class="row">
+                <div class="col-md-7">
+               
                   <div class="panel panel-default">
                     <div class="panel-body">
+                     
                       <table class="table table-bordered">
                         <tr>
                           <td width="35%">NAMA</td>
@@ -156,6 +170,7 @@ if(mysqli_num_rows($cek_ikut_ujian) > 0)
 
   <?php 
   include "../script.php"; 
+}
   ?>
 </body>
 </html>

@@ -68,11 +68,6 @@ if($data_ikut_ujian['status'] == 'selesai'){
 
   $time_out = date('Y-m-d H:i:s', strtotime('+' . $data['waktu'] . ' minutes', strtotime($tgl_batas_ujian)));
 
-  if ($status == 2){
-    echo '
-    <button class="alert alert-warning"> Jadwal Tes di muai pada tanggal <strong>'.  date('d M Y - H:i', strtotime($data['tgl_mulai'])).' 
-    </strong></button>';
-  } 
   ?>
 
   <div class="content">
@@ -162,38 +157,38 @@ if($data_ikut_ujian['status'] == 'selesai'){
                   }
                   ?>
                   <div class="card">
-                    <div class="card-header bg-info">
+                    <div class="card-header bg-gradient-light border-dark">
                       <?= $row_soal['soal'] ?>
                     </div>
                     <div class="card-body">
                       <table class="table table-sm">
                         <tr>
                           <td class="pr-3" style="width: 10px;">
-                            <button type="button" id="jawaban_A_<?= $row_soal['id'] ?>" onclick="simpan_nilai('<?= $id ?>','<?= $row_soal['id'] ?>', 'A')" class="btn btn-sm btn-<?= $jawaban == 'A' ? 'warning' : 'info' ?> btn-disabled">A</button>
+                            <button type="button" id="jawaban_A_<?= $row_soal['id'] ?>" onclick="simpan_nilai('<?= $id ?>','<?= $row_soal['id'] ?>', 'A')" class="btn btn-sm btn-<?= $jawaban == 'A' ? 'success' : 'dark' ?> btn-disabled">A</button>
                           </td>
                           <td><?= $row_soal['opsi_a'] ?></td>
                         </tr>
                         <tr>
                           <td class="pr-3">
-                            <button type="button" id="jawaban_B_<?= $row_soal['id'] ?>" onclick="simpan_nilai('<?= $id ?>','<?= $row_soal['id'] ?>', 'B')" class="btn btn-sm btn-<?= $jawaban == 'B' ? 'warning' : 'info' ?> btn-disabled">B</button>
+                            <button type="button" id="jawaban_B_<?= $row_soal['id'] ?>" onclick="simpan_nilai('<?= $id ?>','<?= $row_soal['id'] ?>', 'B')" class="btn btn-sm btn-<?= $jawaban == 'B' ? 'success' : 'dark' ?> btn-disabled">B</button>
                           </td>
                           <td><?= $row_soal['opsi_b'] ?></td>
                         </tr>
                         <tr>
                           <td class="pr-3">
-                            <button type="button" id="jawaban_C_<?= $row_soal['id'] ?>" onclick="simpan_nilai('<?= $id ?>','<?= $row_soal['id'] ?>', 'C')" class="btn btn-sm btn-<?= $jawaban == 'C' ? 'warning' : 'info' ?> btn-disabled">C</button>
+                            <button type="button" id="jawaban_C_<?= $row_soal['id'] ?>" onclick="simpan_nilai('<?= $id ?>','<?= $row_soal['id'] ?>', 'C')" class="btn btn-sm btn-<?= $jawaban == 'C' ? 'success' : 'dark' ?> btn-disabled">C</button>
                           </td>
                           <td><?= $row_soal['opsi_c'] ?></td>
                         </tr>
                         <tr>
                           <td class="pr-3">
-                            <button type="button" id="jawaban_D_<?= $row_soal['id'] ?>" onclick="simpan_nilai('<?= $id ?>','<?= $row_soal['id'] ?>', 'D')" class="btn btn-sm btn-<?= $jawaban == 'D' ? 'warning' : 'info' ?> btn-disabled">D</button>
+                            <button type="button" id="jawaban_D_<?= $row_soal['id'] ?>" onclick="simpan_nilai('<?= $id ?>','<?= $row_soal['id'] ?>', 'D')" class="btn btn-sm btn-<?= $jawaban == 'D' ? 'success' : 'dark' ?> btn-disabled">D</button>
                           </td>
                           <td><?= $row_soal['opsi_d'] ?></td>
                         </tr>
                         <tr>
                           <td class="pr-3">
-                            <button type="button" id="jawaban_E_<?= $row_soal['id'] ?>" onclick="simpan_nilai('<?= $id ?>','<?= $row_soal['id'] ?>', 'E')" class="btn btn-sm btn-<?= $jawaban == 'E' ? 'warning' : 'info' ?> btn-disabled">E</button>
+                            <button type="button" id="jawaban_E_<?= $row_soal['id'] ?>" onclick="simpan_nilai('<?= $id ?>','<?= $row_soal['id'] ?>', 'E')" class="btn btn-sm btn-<?= $jawaban == 'E' ? 'success' : 'dark' ?> btn-disabled">E</button>
                           </td>
                           <td><?= $row_soal['opsi_e'] ?></td>
                         </tr>
@@ -219,16 +214,16 @@ if($data_ikut_ujian['status'] == 'selesai'){
         success: function(response) {
           if(response == 'success')
           {
-            document.getElementById("jawaban_A_"+id_soal).classList.replace('btn-warning', 'btn-info');
-            document.getElementById("jawaban_B_"+id_soal).classList.replace('btn-warning', 'btn-info');
-            document.getElementById("jawaban_C_"+id_soal).classList.replace('btn-warning', 'btn-info');
-            document.getElementById("jawaban_D_"+id_soal).classList.replace('btn-warning', 'btn-info');
-            document.getElementById("jawaban_E_"+id_soal).classList.replace('btn-warning', 'btn-info');
+            document.getElementById("jawaban_A_"+id_soal).classList.replace('btn-success', 'btn-dark');
+            document.getElementById("jawaban_B_"+id_soal).classList.replace('btn-success', 'btn-dark');
+            document.getElementById("jawaban_C_"+id_soal).classList.replace('btn-success', 'btn-dark');
+            document.getElementById("jawaban_D_"+id_soal).classList.replace('btn-success', 'btn-dark');
+            document.getElementById("jawaban_E_"+id_soal).classList.replace('btn-success', 'btn-dark');
 
             setTimeout(function() { 
               var element = document.getElementById("jawaban_"+jawaban+"_"+id_soal);
-              element.classList.remove("btn-info");
-              element.classList.add("btn-warning");
+              element.classList.remove("btn-dark");
+              element.classList.add("btn-success");
             }, 100);
           }
           else{
