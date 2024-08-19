@@ -102,10 +102,30 @@ if(!empty($_GET['proses']))
 	#==PROSES
 	else if($proses == 'selesai_ujian')
 	{
-		$id_tes  	= @$_GET['id_tes'];
-		$id_user 	= $_SESSION['user'];
+		$id_tes  	 	= @$_GET['id_tes'];
+		$id_user  		= $_SESSION['user'];
+		$selesai 		= 'selesai';
+		$tgl_selesai	= date('Y-m-d H:i:s');
 
-		$sql = mysqli_query($con, "UPDATE tbl_ikut_ujian SET status = 'selesai', tgl_selesai = '".date('Y-m-d H:i:s')."' WHERE id_tes='".$id_tes."' AND id_user='".$id_user."' ");
+		$benar = 0;
+
+		$sql_soaljawab = mysqli_query($con, "SELECT a.id AS id, a.jawaban AS jawaban, c.jawaban AS kunci 
+		FROM tbl_jawaban AS a 
+		INNER JOIN tbl_guru_tes AS b ON a.id_tes = b.id 
+		INNER JOIN tbl_soal AS c ON a.id_soal = c.id
+		WHERE a.id_user = '$id_user' AND a.id_tes = '$id_tes' 
+		GROUP BY a.id") or die(mysqli_error($con));
+
+		while ($row = mysqli_fetch_assoc($sql_soaljawab)) {
+			if ($row['jawaban'] == $row['kunci']) {
+				$benar++;
+			}
+		}
+		$row_data 	= mysqli_num_rows($sql_soaljawab);
+		$nilai 		= ($benar / $row_data ) * 100;
+
+		$sql   = mysqli_query($con, "UPDATE tbl_ikut_ujian SET jml_benar = '$benar',nilai = '$nilai', status = '$selesai', tgl_selesai = '$tgl_selesai' WHERE id_tes='$id_tes' AND id_user='$id_user' ");
+
 
 		if($sql){
 			header('Location: '. 'ujian.php?id='.$id_tes); 
