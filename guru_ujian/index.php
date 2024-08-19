@@ -78,7 +78,7 @@ if (isset($_SESSION['peran'])) {
                               <th>
                                 <center>Mata Pelajaran</center>
                               </th>
-                              <th style="width:15%" ;>
+                              <th style="width:10%" ;>
                                 <center>Jumlah Soal </center>
                               </th>
                               <th>
@@ -158,11 +158,17 @@ if (isset($_SESSION['peran'])) {
 
                                   <td>
                                     <center>
+                                      <a href="detail.php?id=<?= $id ?>" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-search"></i>
+                                        Lihat hasil
+                                      </a>
+
                                       <button class="btn btn-primary btn-sm" data-toggle="modal"
                                         data-target="#modal-editdata" data-id="<?= $id; ?>" data-nip="<?= $data['nip']; ?>" data-nama="<?= $data['nama_ujian']; ?>" data-mapel="<?= $id_mapel; ?>" data-kelas="<?= $data['kelas']; ?>" data-jurusan="<?= $data['kode_jurusan']; ?>" data-jumlah="<?= $data['jumlah_soal'];  ?>" data-mulai="<?= $data['tgl_mulai']; ?>" data-terlambat="<?= $data['terlambat']; ?>"  data-waktu="<?= $data['waktu']; ?>" >
                                         <i class="fas fa-edit"></i>
                                         Edit
                                       </button>
+                                     
                                       <a href="delete.php?id=<?= $id ?>" class="btn btn-danger btn-sm"
                                         onclick="return confirm('Anda akan menghapus data ujian [ <?= $data['nama_ujian'] ?> ]?')">
                                         <i class="fas fa-trash"></i>

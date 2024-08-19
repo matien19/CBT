@@ -63,7 +63,7 @@ $data_soal  = mysqli_fetch_array($sql_soal);
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
-              <div class="card-header" style="background-color:#86090f">
+              <div class="card-header"  style="background-color:#365E32">
               <font color="ffffff">
               <h3 class="card-title"><i class="nav-icon fas fa-folder"></i> Edit Soal</h3>
               </font>
@@ -246,9 +246,46 @@ if(isset($_POST['editdata'])) {
   $benar     = 0;
   $salah     = 0;
 
-  $sql       = "UPDATE tbl_soal SET VALUES (null,'$nip','$mapel', '$kelas','$file','$type_file', '$soal', '$jawaban_a', '$jawaban_b', '$jawaban_c', '$jawaban_d', '$jawaban_e', '$kunci_jawaban', '$date')";
+  $query_update = "UPDATE tbl_soal SET
+  id_guru = '$nip',
+  id_mapel='$mapel', 
+  kelas='$kelas',
+  file ='$file',
+  tipe_file ='$type_file', 
+  soal='$soal', 
+  opsi_a='$jawaban_a', 
+  opsi_b='$jawaban_b', 
+  opsi_c='$jawaban_c', 
+  opsi_d='$jawaban_d', 
+  opsi_e='$jawaban_e', 
+  jawaban='$kunci_jawaban', 
+  tgl_input='$date' WHERE id = '$id'";
+  $sql_update   = mysqli_query($con, $query_update) or die(mysqli_error($con));
+  if ($sql_update) {
+    echo '
+              <script>
+             swal("Berhasil", "Data soal telah berhasil diedit", "success");
+             
+             setTimeout(function(){ 
+             window.location.href = "../guru_soal";
 
-//  echo $nip.'-'.$mapel.'-'.$kelas.'-'.$soal.'-'.$jawaban_a.'-'.$jawaban_b.'-'.$jawaban_c.'-'.$jawaban_d.'-'.$jawaban_e.'-'.$kunci_jawaban.'-'.$file.'-'.$type_file.'-'.$date.'-'.$benar.'-'.$salah;
+             }, 1000);
+           </script>
+          ';
+      
+  } else {
+    echo '
+              <script>
+             swal("Gagal", "Data soal gagal diedit", "error");
+             
+             setTimeout(function(){ 
+             window.location.href = "../update.php?id=";
+
+             }, 1000);
+           </script>
+          ';
+      
+  }
    
 }
 ?>

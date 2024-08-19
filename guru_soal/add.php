@@ -57,7 +57,7 @@ include '../sidebar_guru.php';
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
-              <div class="card-header" style="background-color:#86090f">
+              <div class="card-header" style="background-color:#365E32">
               <font color="ffffff">
               <h3 class="card-title"><i class="nav-icon fas fa-folder"></i> Input Soal</h3>
               </font>
