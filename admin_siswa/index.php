@@ -102,6 +102,7 @@ if (isset($_SESSION['peran'])) {
                               <th>NIS / Username </th>
                               <th>Nama</th>
                               <th>Kelas - Jurusan</th>
+                              <th>Status</th>
                               <th>
                                 <center>Aksi</center>
                               </th>
@@ -114,7 +115,7 @@ if (isset($_SESSION['peran'])) {
                             $sql_siswa = mysqli_query($con, $query_siswa) or die(mysqli_error($con));
                             if (mysqli_num_rows($sql_siswa) > 0) {
                               while ($data = mysqli_fetch_array($sql_siswa)) {
-                                $stat = $data['stat'];
+                                $stt = $data['stat'];
                                 $kd_jurusan = $data['kode_jurusan']
                                   ?>
                                 <tr>
@@ -146,11 +147,35 @@ if (isset($_SESSION['peran'])) {
                                       ?>
                                     </h6>
                                   </td>
-
+                                  <td>
+                                  <?php
+                     
+                                  if ($stt=='T')
+                                    {
+                                     ?>
+                                     <center>
+                                     <button type="button" class="btn btn-default btn-sm"> 
+                                      Tidak Aktif
+                                     </button>
+                                     </center>
+                                     <?php 
+                                    }
+                                    else
+                                    {
+                                      ?>
+                                    <center>
+                                     <button type="button" class="btn btn-success btn-sm"> 
+                                      Aktif
+                                     </button>
+                                     </center>
+                                     <?php 
+                                    }
+                                  ?>
+                                 </td>
                                   <td>
                                     <center>
                                       <?php
-                                      $stt = $data['stat'];
+                                      
                                       if ($stt == 'T') {
                                         ?>
                                         <a href="aktifkan.php?nis=<?= $data['nis']; ?>" class="btn btn-success btn-sm"
@@ -245,11 +270,11 @@ if (isset($_SESSION['peran'])) {
                   <div class="modal-body">
                     <div class="form-group">
                       <label for="nis">NIS</label>
-                      <input type="number" name="nis" class="form-control" placeholder="Masukan NIM">
+                      <input type="number" name="nis" class="form-control" placeholder="Masukan NIS" required>
                     </div>
                     <div class="form-group">
                       <label for="Nama">Nama</label>
-                      <input type="text" name="nama" class="form-control" placeholder="Masukan Nama">
+                      <input type="text" name="nama" class="form-control" placeholder="Masukan Nama" required>
                     </div>
 
                     <div class="form-group">
@@ -320,7 +345,7 @@ if (isset($_SESSION['peran'])) {
             </div>
             <div class="form-group">
               <label for="Kelas">Kelas</label>
-              <select class="form-control" name="kelas">
+              <select class="form-control" name="kelas" required>
                 <option>X</option>
                 <option>XI</option>
                 <option>XII</option>
@@ -379,10 +404,27 @@ if (isset($_SESSION['peran'])) {
               <label for="Nama">Ambil file Excel</label>
               <input type="file" id="file" name="file" class="form-control" accept=".xls,.xlsx" required>
             </div>
-            <h6>Template Excel</h6>
-            <a href="download.php?filename=templatesiswa.xls" class="btn btn-success btn-sm">
-              <i class="nav-icon fas fa-file-excel"></i> Download
-            </a>
+            <div class="row">
+              <div class="col-lg-4">
+              <center>
+
+              <h6><b>Template Excel</b></h6>
+              <a href="download.php?filename=templatesiswa.xls" class="btn btn-success btn-sm">
+                <i class="nav-icon fas fa-file-excel"></i> Download
+              </a>
+              </center>
+              </div>
+              <div class="col-lg-4">
+              <center>
+
+              <h6><b>Data Jurusan</b></h6>
+              <a href="export_jurusan.php" class="btn btn-info btn-sm">
+                <i class="nav-icon fas fa-file-excel"></i> export
+              </a>
+              </center>
+              </div>
+            </div>
+           
           </div>
           <div class="modal-footer pull-right">
             <button type="submit" class="btn btn-warning" name="impor" style="background-color:#FCDC2A"><i
