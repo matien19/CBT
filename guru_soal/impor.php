@@ -8,9 +8,6 @@ error_reporting(0);
 <head>
 </head>
 <body>
-    <!-- /.sweetalert -->
-<script src="../assets_adminlte/js/sweetalert2.js"></script>
-<script src="../assets_adminlte/js/sweetalert.js"></script>
 <div class="wrapper" style="zoom:90%" !important>
   <?php
 
@@ -20,7 +17,7 @@ error_reporting(0);
         $ekstensi = explode (".", $file);
         $file_name = "file".round(microtime(true)).".".end($ekstensi);
         $sumber = $_FILES['file']['tmp_name'];
-        $target_dir ="template/";
+        $target_dir ="template/import/";
         $target_file = $target_dir.$file_name;
         $upload = move_uploaded_file($sumber, $target_file);      
 
@@ -29,34 +26,52 @@ error_reporting(0);
 
         for ($j=2; $j <= count($data_excel); $j++)
         {
-          $nip       = $data_excel[$j]['B'];
-          $nama      = addslashes($data_excel[$j]['C']);
-          $pass      = md5($nip);
-          $peran     = 'guru';
-          $stat      = 'A';
-
-          $query_chek = mysqli_query($con, "SELECT nip FROM tbl_guru WHERE nip = '$nip'") or die(mysqli_error($con));  
-          if (mysqli_num_rows($query_chek) == 0){
-            mysqli_query($con, "INSERT INTO tbl_guru VALUES ('$nip','$nama')") or die(mysqli_error($con));      
-
-            mysqli_query($con, "INSERT INTO tbl_user VALUES (NULL,'$nip','$pass','$peran','$nama','$stat')") or die(mysqli_error($con)); 
-            echo '
+        $nip              = $data_excel[$j]['B'];
+        $mapel            = addslashes($data_excel[$j]['C']);
+        $kelas            = $data_excel[$j]['D'];
+        $soal             = '<p>'.$data_excel[$j]['E'].'</p>';
+        $jawaban_a        = '<p>'.$data_excel[$j]['F'].'</p>';
+        $jawaban_b        = '<p>'.$data_excel[$j]['G'].'</p>';
+        $jawaban_c        = '<p>'.$data_excel[$j]['H'].'</p>';
+        $jawaban_d        = '<p>'.$data_excel[$j]['I'].'</p>';
+        $jawaban_e        = '<p>'.$data_excel[$j]['J'].'</p>';
+        $kunci_jawaban    = $data_excel[$j]['K'];
+        $file             = '-';
+        $type_file        = '-';
+        $date             = date('Y-m-d H:i:s');
+        $kosong           = '';
            
-             <script>
-               swal("Berhasil", "Data Guru telah ditambahkan", "success");
-               
-               setTimeout(function(){ 
-               window.location.href = "../admin_guru";
-   
-               }, 1000)'; 
+        // echo $nip,$mapel.$kelas.$file.$type_file.$soal.$jawaban_a.$jawaban_b.$jawaban_c.$jawaban_d.$jawaban_e.$kunci_jawaban,$date;
+        $query_chek = mysqli_query($con, "SELECT soal FROM tbl_soal WHERE soal = '$soal'") or die(mysqli_error($con));  
+        if (mysqli_num_rows($query_chek) == 0){
+
+         $sql  = "INSERT INTO tbl_soal VALUES (null,'$nip','$mapel', '$kelas','$file','$type_file', '$soal', '$jawaban_a', '$jawaban_b', '$jawaban_c', '$jawaban_d', '$jawaban_e', '$kunci_jawaban', '$date')";
+              
+         mysqli_query($con, $sql) or die(mysqli_error($con));  
+         mysqli_query($con, "DELETE FROM tbl_soal WHERE soal ='$kosong'") or die(mysqli_error($con));  
           }
-    
+          
         }
-    unlink($target_file);
+    
+        unlink($target_file);
+
+        echo 
+        '
+         
+          <script src="../assets_adminlte/js/sweetalert.js"></script>
+          <script>
+            swal("Berhasil", "Import Data Soal telah berhasil", "success");
+            
+            setTimeout(function(){ 
+            window.location.href = "../guru_soal";
+
+            }, 1000);
+          </script>
+        ';
     }
+    
     ?>
 
 
-</script>
 </body>
 </html>

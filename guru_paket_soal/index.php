@@ -1,6 +1,6 @@
 <?php 
 require_once '../database/config.php';
-$hal = 'soal';
+$hal = 'paket_soal';
 if (isset($_SESSION['peran']))
 {
   if ($_SESSION['peran']!='guru') 
