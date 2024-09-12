@@ -14,6 +14,14 @@
             </p>
           </a>
         </li>
+          <!-- <li class="nav-item">
+          <a href="../guru_paket_soal" class="nav-link <?php if ($hal == 'paket_soal') { echo 'active'; } ?>">
+            <i class="nav-icon fas fa-cubes"></i>
+            <p>
+            Paket Soal
+            </p>
+          </a>
+        </li> -->
           <li class="nav-item">
             <a href="../guru_ujian" class="nav-link <?php if($hal == 'ujian') { echo 'active';}?>">
               <i class="nav-icon fas fa-book-open"></i>

@@ -14,37 +14,57 @@ require_once "../database/config.php";
   <?php
     if (isset($_POST['tambahdata']))
     {
-      $id_guru     = trim(mysqli_real_escape_string($con, $_POST['nip']));
-      $id_mapel     = trim(mysqli_real_escape_string($con, $_POST['mapel']));
-      $nama_ujian   = trim(mysqli_real_escape_string($con, $_POST['nama']));
       $jml_soal   = trim(mysqli_real_escape_string($con, $_POST['soal']));
+      $id_mapel     = trim(mysqli_real_escape_string($con, $_POST['mapel']));
       $kelas   = trim(mysqli_real_escape_string($con, $_POST['kelas']));
-      $jurusan   = trim(mysqli_real_escape_string($con, $_POST['jurusan']));
-      $waktu   = trim(mysqli_real_escape_string($con, $_POST['waktu']));
-      $jenis   = 'set';
 
-      $tgl_mulai   = trim(mysqli_real_escape_string($con, $_POST['tgl_mulai']));
-      $waktu_mulai   = trim(mysqli_real_escape_string($con, $_POST['wkt_mulai']));
-      $mulai = $tgl_mulai. " ". $waktu_mulai;
+      $sqlsoal      = mysqli_query($con, "SELECT id FROM tbl_soal WHERE id_mapel='$id_mapel' AND kelas='$kelas'") or die(mysqli_error($con));
+      $jml_soal_db  = mysqli_num_rows($sqlsoal);
       
-      $tgl_selesai   = trim(mysqli_real_escape_string($con, $_POST['tgl_selesai']));
-      $waktu_selesai   = trim(mysqli_real_escape_string($con, $_POST['wkt_selesai']));
-      $terlambat = $tgl_selesai. " ". $waktu_selesai;
+      if ($jml_soal > $jml_soal_db ) {
+        echo '
+          <script>
+          swal("Chek Jumlah Soal", "Data soal pada bank soal kurang / kosong", "warning");
+          
+          setTimeout(function(){ 
+          window.location.href = "../guru_ujian";
 
-      $token = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
-
-          mysqli_query($con, "INSERT INTO tbl_guru_tes VALUES (NULL, '$id_guru','$id_mapel','$kelas','$nama_ujian','$jml_soal','$jurusan','$waktu','$jenis','$mulai','$terlambat','$token')") or die (mysqli_error($con));
-         
-          echo '
-              <script>
-             swal("Berhasil", "Data Ujian telah ditambahkan", "success");
-             
-             setTimeout(function(){ 
-             window.location.href = "../guru_ujian";
-
-             }, 1000);
-           </script>
+          }, 2000);
+          </script>
           ';
+      }else {
+
+        $id_guru     = trim(mysqli_real_escape_string($con, $_POST['nip']));
+        $nama_ujian   = trim(mysqli_real_escape_string($con, $_POST['nama']));
+        $jurusan   = trim(mysqli_real_escape_string($con, $_POST['jurusan']));
+        $waktu   = trim(mysqli_real_escape_string($con, $_POST['waktu']));
+        $jenis   = 'set';
+  
+        $tgl_mulai   = trim(mysqli_real_escape_string($con, $_POST['tgl_mulai']));
+        $waktu_mulai   = trim(mysqli_real_escape_string($con, $_POST['wkt_mulai']));
+        $mulai = $tgl_mulai. " ". $waktu_mulai;
+        
+        $tgl_selesai   = trim(mysqli_real_escape_string($con, $_POST['tgl_selesai']));
+        $waktu_selesai   = trim(mysqli_real_escape_string($con, $_POST['wkt_selesai']));
+        $terlambat = $tgl_selesai. " ". $waktu_selesai;
+  
+        $token = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
+  
+            mysqli_query($con, "INSERT INTO tbl_guru_tes VALUES (NULL, '$id_guru','$id_mapel','$kelas','$nama_ujian','$jml_soal','$jurusan','$waktu','$jenis','$mulai','$terlambat','$token')") or die (mysqli_error($con));
+           
+            
+            echo '
+                <script>
+               swal("Berhasil", "Data Ujian telah ditambahkan", "success");
+               
+               setTimeout(function(){ 
+               window.location.href = "../guru_ujian";
+  
+               }, 1000);
+             </script>
+            ';
+      }
+      
       }
         
     ?>

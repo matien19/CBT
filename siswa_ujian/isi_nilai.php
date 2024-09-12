@@ -74,8 +74,8 @@ if($data_ikut_ujian['status'] == 'selesai'){
     <br>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-4">
-          <div class="card">
+        <div class="col-md-4" >
+          <div class="card  position-sticky" style="top: 15px;">
             <div class="card-header" style="background-color:#365E32">
               <font color="ffffff">
                 <h3 class="card-title"><i class="nav-icon fas fa-book-open"></i> Identitas</h3>
@@ -158,7 +158,9 @@ if($data_ikut_ujian['status'] == 'selesai'){
                   ?>
                   <div class="card">
                     <div class="card-header bg-gradient-light border-dark">
-                      <?= $row_soal['soal'] ?>
+                      <div class="row">
+                      <?= '<b>'.$no_soal.'</b>.  '. $row_soal['soal'] ?>
+                      </div>
                     </div>
                     <div class="card-body">
                       <table class="table table-sm">

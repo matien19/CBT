@@ -65,7 +65,7 @@ if (isset($_SESSION['peran'])) {
                       <!-- /.card-header -->
                       <div class="card-body">
                         <button type="button" class="btn btn-danger" data-toggle="modal"
-                          data-target="#modal-tambahadmin" style="background-color:#86090f">
+                          data-target="#modal-tambahujian" style="background-color:#86090f">
                           <i class="nav-icon fas fa-plus"></i> Tambah Tes
                         </button>
                         <table id="example1" class="table table-bordered table-striped table-sm">
@@ -218,14 +218,14 @@ if (isset($_SESSION['peran'])) {
           ?>
 
           <!-- modal tambah data -->
-          <div class="modal fade" id="modal-tambahadmin">
+          <div class="modal fade" id="modal-tambahujian">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header" style="background-color:#1A5319">
                   <h5 class="modal-title">
                     <font color="ffffff">
                       <i class="nav-icon fas fa-plus"></i>
-                      Edit Data Soal
+                      Tambah Data Ujian
                     </font>
                   </h5>
 
