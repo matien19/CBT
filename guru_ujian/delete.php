@@ -11,6 +11,7 @@ require_once "../database/config.php";
       
       $id = @$_GET['id'];
       mysqli_query($con, "DELETE FROM tbl_guru_tes WHERE id='$id'") or die (mysqli_error($con));
+      mysqli_query($con, "DELETE FROM tbl_paket_soal WHERE id_ujian='$id'") or die (mysqli_error($con));
     ?>
 
   <!-- /.sweetalert -->
