@@ -1,3 +1,4 @@
 vendor
 /guru_pengesahan/qr_pengabsahan/*.png
 /guru_ujian/phpqrcode/*.txt
+!assets_adminlte/dist/phpexcel-xls-library/vendor
