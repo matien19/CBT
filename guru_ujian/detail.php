@@ -9,6 +9,8 @@ if (isset($_SESSION['peran'])) {
 } else {
   echo "<script>window.location='../auth/logout.php';</script>";
 }
+
+$id = @$_GET['id'];
 ?>
 
 <!DOCTYPE html>
@@ -66,12 +68,12 @@ if (isset($_SESSION['peran'])) {
                       <!-- /.card-header -->
                       <div class="card-body">
                         <div class="col-md-12">
-                          <a href="../guru_ujian/" class="btn btn-danger btn-sm"> <i class="fas fa-arrow-alt-circle-left"></i> <strong> kembali </strong> </a>
+                          <a href="../guru_ujian/" class="btn btn-primary btn-sm"> <i class="fas fa-arrow-alt-circle-left"></i> <strong> kembali </strong> </a>
+                          <a href="eksporpdf.php?id_ujian=<?= $id;?>" target="_blank" class="btn btn-danger btn-sm"> <i class="fas fa-file"></i> <strong> Ekspor PDF </strong> </a>
                         </div>
                         <br>
                       <div class="row">
                       <?php
-                      $id = @$_GET['id'];
                       $quey_tes = "SELECT a.id, a.kelas, a.nama_ujian, a.jumlah_soal, a.waktu, a.token, a.tgl_mulai, a.terlambat,b.nip, b.nama AS guru, c.nama AS mapel, d.nama AS jurusan FROM tbl_guru_tes AS a INNER JOIN tbl_guru AS b ON a.id_guru = b.nip INNER JOIN tbl_mapel AS c ON a.id_mapel = c.id INNER JOIN tbl_jurusan AS d ON a.kode_jurusan = d.kode_jurusan WHERE a.id = '$id'";
                       $sql_tes = mysqli_query($con, $quey_tes) or die(mysqli_error($con));
                       $data = mysqli_fetch_array($sql_tes);
