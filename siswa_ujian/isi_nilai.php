@@ -33,7 +33,7 @@ if($data_ikut_ujian['status'] == 'selesai'){
   ?>
   
  </head>
-<body>
+<body onload="toggleFullscreen()">
 
   <?php
   $id = $_GET['id'];
@@ -74,8 +74,8 @@ if($data_ikut_ujian['status'] == 'selesai'){
     <br>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-4">
-          <div class="card">
+        <div class="col-md-4" >
+          <div class="card  position-sticky" style="top: 15px;">
             <div class="card-header" style="background-color:#365E32">
               <font color="ffffff">
                 <h3 class="card-title"><i class="nav-icon fas fa-book-open"></i> Identitas</h3>
@@ -135,7 +135,7 @@ if($data_ikut_ujian['status'] == 'selesai'){
             </font>
             <div class="card-body">
               <?php
-              $data_soal = mysqli_query($con, "SELECT * FROM tbl_soal WHERE id_mapel='".$data['id_mapel']."' AND kelas='".$data['kelas']."' ") or die(mysqli_error($con));
+              $data_soal = mysqli_query($con, "SELECT b.* FROM tbl_paket_soal AS a INNER JOIN tbl_soal AS b ON a.id_soal = b.id WHERE a.id_ujian = '$id'") or die(mysqli_error($con));
 
               if(mysqli_num_rows($data_soal) > 0)
               {
@@ -158,7 +158,9 @@ if($data_ikut_ujian['status'] == 'selesai'){
                   ?>
                   <div class="card">
                     <div class="card-header bg-gradient-light border-dark">
-                      <?= $row_soal['soal'] ?>
+                      <div class="row" style="font-size: 24px;">
+                      <?= '<b>'.$no_soal.'</b>.  '. $row_soal['soal'] ?>
+                      </div>
                     </div>
                     <div class="card-body">
                       <table class="table table-sm">
@@ -203,8 +205,28 @@ if($data_ikut_ujian['status'] == 'selesai'){
     </div>
   </div>
   <script>
+    function toggleFullscreen() {
+      // Cek jika elemen fullscreen aktif, jika tidak aktif maka akan masuk mode fullscreen
+      if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
+        // Masuk mode fullscreen
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+          document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+          document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+          document.documentElement.msRequestFullscreen();
+        }
+      } 
+    }
+     
+    
+  </script>
+  <script>
     function simpan_nilai(id_tes, id_soal, jawaban) 
     {
+      toggleFullscreen() 
       $('#jawaban_'+jawaban+'_'+id_soal).html('<i class="fas fa-spinner fa-pulse"></i>');
       $('.btn-disabled').prop('disabled', true);
 
