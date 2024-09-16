@@ -53,16 +53,32 @@ if(mysqli_num_rows($cek_ikut_ujian) > 0)
   $sql_siswa = mysqli_query($con, $query_siswa) or die(mysqli_error($con));
   $data_siswa = mysqli_fetch_assoc($sql_siswa);
   if ($status == 2){
-    echo '
-    <script src="../assets_adminlte/js/sweetalert.js"></script>
-    <script>
-      swal("Peringatan!", "Anda sudah terlambat untuk mengikuti Ujian ini", "warning");
-      
-      setTimeout(function(){ 
-      window.location.href = "../siswa_ujian";
 
-      }, 1000);
-    </script> ';
+    $query_ikut = "SELECT id_user FROM tbl_ikut_ujian WHERE id_user = '$nis' AND id_tes ='$id'";
+    $sql_ikut_uji = mysqli_query($con, $query_ikut)or die(mysqli_error($con));
+    if (mysqli_num_rows($sql_ikut_uji) == 0) {
+      
+      $sql_telat = mysqli_query($con, "INSERT INTO tbl_ikut_ujian SET 
+      id_tes = '$id',
+      id_user = '$nis',
+      tgl_mulai = '".date('Y-m-d H:i:s')."',
+      status = 'terlambat'
+    ")or die(mysqli_error($con));
+      if ($sql_telat) { 
+        echo '
+      <script src="../assets_adminlte/js/sweetalert.js"></script>
+      <script>
+        swal("Peringatan!", "Anda sudah terlambat untuk mengikuti Ujian ini", "warning");
+        
+        setTimeout(function(){ 
+        window.location.href = "../siswa_ujian";
+
+        }, 2000);
+      </script> ';
+      }
+    }
+
+    
   } else {
   ?>
 

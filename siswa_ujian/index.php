@@ -158,6 +158,9 @@ if (isset($_SESSION['peran'])) {
                                     
                                     if($status_ujian == 'selesai'){
                                       echo '<button type="button" disabled class="btn btn-outline-info btn-flat"><i class="fas fa-check-circle"></i> Selesai Ujian</button>';
+                                    } elseif ($status_ujian == 'terlambat'){
+                                      echo '<button type="button" disabled class="btn btn-outline-danger btn-flat"><i class="fas fa-times-circle"></i> Terlambat Ujian</button>';
+
                                     }
                                     else{
                                       ?>

@@ -95,23 +95,24 @@ CREATE TABLE IF NOT EXISTS `tbl_ikut_ujian` (
   `nilai` decimal(10,2) DEFAULT '0.00',
   `tgl_mulai` datetime NOT NULL,
   `tgl_selesai` datetime DEFAULT NULL,
-  `status` enum('ujian','selesai') DEFAULT 'ujian',
+  `status` enum('ujian','selesai','terlambat') CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT 'ujian',
   PRIMARY KEY (`id`),
   KEY `id_tes` (`id_tes`),
   KEY `id_user` (`id_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table db_cbt.tbl_ikut_ujian: 1 rows
 /*!40000 ALTER TABLE `tbl_ikut_ujian` DISABLE KEYS */;
 INSERT INTO `tbl_ikut_ujian` (`id`, `id_tes`, `id_user`, `jml_benar`, `nilai`, `tgl_mulai`, `tgl_selesai`, `status`) VALUES
-	(10, 23, '42421071', 5, 33.33, '2024-09-13 01:33:04', '2024-09-13 02:44:45', 'selesai');
+	(14, 24, '42421071', 0, 0.00, '2024-09-16 20:26:11', NULL, 'terlambat'),
+	(12, 23, '42421071', 0, 0.00, '2024-09-16 20:24:40', NULL, 'terlambat');
 /*!40000 ALTER TABLE `tbl_ikut_ujian` ENABLE KEYS */;
 
 -- Dumping structure for table db_cbt.tbl_jawaban
 CREATE TABLE IF NOT EXISTS `tbl_jawaban` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_tes` int NOT NULL,
-  `id_user` int NOT NULL,
+  `id_user` varchar(50) NOT NULL DEFAULT '',
   `id_soal` int NOT NULL,
   `jawaban` varchar(2) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE,
@@ -121,34 +122,19 @@ CREATE TABLE IF NOT EXISTS `tbl_jawaban` (
 
 -- Dumping data for table db_cbt.tbl_jawaban: 15 rows
 /*!40000 ALTER TABLE `tbl_jawaban` DISABLE KEYS */;
-INSERT INTO `tbl_jawaban` (`id`, `id_tes`, `id_user`, `id_soal`, `jawaban`) VALUES
-	(94, 23, 42421071, 4, 'A'),
-	(93, 23, 42421071, 5, 'B'),
-	(92, 23, 42421071, 6, 'A'),
-	(91, 23, 42421071, 7, 'A'),
-	(90, 23, 42421071, 8, 'A'),
-	(89, 23, 42421071, 9, 'A'),
-	(88, 23, 42421071, 10, 'A'),
-	(87, 23, 42421071, 11, 'A'),
-	(86, 23, 42421071, 12, 'A'),
-	(85, 23, 42421071, 13, 'A'),
-	(84, 23, 42421071, 14, 'A'),
-	(83, 23, 42421071, 15, 'A'),
-	(82, 23, 42421071, 3, 'B'),
-	(81, 23, 42421071, 2, 'A'),
-	(80, 23, 42421071, 1, 'A');
 /*!40000 ALTER TABLE `tbl_jawaban` ENABLE KEYS */;
 
 -- Dumping structure for table db_cbt.tbl_jurusan
 CREATE TABLE IF NOT EXISTS `tbl_jurusan` (
   `kode_jurusan` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
-  `nama` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+  `nama` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`kode_jurusan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table db_cbt.tbl_jurusan: ~2 rows (approximately)
 INSERT INTO `tbl_jurusan` (`kode_jurusan`, `nama`) VALUES
-	('A003', 'IPS'),
-	('A001', 'IPA');
+	('A001', 'IPA'),
+	('A003', 'IPS');
 
 -- Dumping structure for table db_cbt.tbl_kelas
 CREATE TABLE IF NOT EXISTS `tbl_kelas` (
@@ -185,7 +171,9 @@ INSERT INTO `tbl_mapel` (`id`, `nama`) VALUES
 -- Dumping structure for table db_cbt.tbl_paket_soal
 CREATE TABLE IF NOT EXISTS `tbl_paket_soal` (
   `id_ujian` int DEFAULT NULL,
-  `id_soal` int DEFAULT NULL
+  `id_soal` int DEFAULT NULL,
+  KEY `id_ujian` (`id_ujian`),
+  KEY `id_soal` (`id_soal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- Dumping data for table db_cbt.tbl_paket_soal: ~19 rows (approximately)
