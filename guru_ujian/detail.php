@@ -236,8 +236,8 @@ $id = @$_GET['id'];
                                         Lihat hasil Ujian
                                       </a>
                                      
-                                      <a href="delete.php?id=<?= $id ?>" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Anda akan menghapus siswa ikut ujian [ <?= $data_ikut['nama'] ?> ]?')">
+                                      <a href="delete_ikut.php?id=<?= $id;?>&nim=<?= $data_ikut['id_user'];?>" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Anda akan menghapus siswa ikut ujian [ <?= $data_ikut['id_user'].' - '.$data_ikut['nama'] ?> ]?')">
                                         <i class="fas fa-trash"></i>
                                         Batalkan Ujian
                                       </a>
