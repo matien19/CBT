@@ -13,6 +13,8 @@ else
 {
   echo "<script>window.location='../auth/logout.php';</script>";
 }
+$nip = $_SESSION['user'];
+
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +51,7 @@ include '../navbar.php';
 <?php
 include '../sidebar_guru.php';
 
-$query_ujian = mysqli_query($con, "SELECT * FROM tbl_guru_tes");
+$query_ujian = mysqli_query($con, "SELECT * FROM tbl_guru_tes WHERE id_guru = '$nip'");
 $total_ujian = mysqli_num_rows($query_ujian);
 
 ?>
