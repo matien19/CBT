@@ -1,6 +1,7 @@
 <?php 
+require_once '../database/config.php';
+
 $hal = 'dasbor';
-session_start();
 if (isset($_SESSION['peran']))
 {
   if ($_SESSION['peran']!='guru') 
@@ -47,14 +48,51 @@ include '../navbar.php';
 
 <?php
 include '../sidebar_guru.php';
+
+$query_ujian = mysqli_query($con, "SELECT * FROM tbl_guru_tes");
+$total_ujian = mysqli_num_rows($query_ujian);
+
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <br>
   <div class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            Dashboard Guru
+            <div class="col-lg-4 col-6">
+            <!-- small card -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3><?= $total_ujian;?></h3>
+
+                  <p>Ujian</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="../guru_ujian" class="small-box-footer">
+                  More info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="col-lg-12 col-6">
+            <!-- small card -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h5> <i class="fas fa-school"></i> SELAMAT DATANG DI DASHBOARD GURU APLIKASI TEST CBT BERBASIS WEB</h5>
+                  <h5>   SMK MA'ARIF NU 01 PAGUYANGAN </h5> 
+                </div>
+                
+                <a href="#" class="small-box-footer">
+                  <hr>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

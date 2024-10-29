@@ -13,7 +13,7 @@ if (!$con)
 function base_url($url = null)
 
   {
-    $base_url = "http://localhost/CBT/";
+    $base_url = "";
     if ($url != null)
     {
     	return $base_url."/".$url;

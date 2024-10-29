@@ -1,5 +1,6 @@
 <?php 
-session_start();
+require_once '../database/config.php';
+
 $hal = 'dasbor';
 if (isset($_SESSION['peran']))
 
@@ -48,12 +49,52 @@ include '../navbar.php';
 
 <?php
 include '../sidebar_siswa.php';
+
+$query_ujian = mysqli_query($con, "SELECT * FROM tbl_guru_tes");
+$total_ujian = mysqli_num_rows($query_ujian);
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <br>
   <div class="content">
       <div class="container-fluid">
-        ini adalah area untuk konten siswa
+      <div class="row">
+          <div class="col-lg-12">
+            <div class="col-lg-4 col-6">
+            <!-- small card -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3><?= $total_ujian;?></h3>
+
+                  <p>Ujian</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="../siswa_ujian" class="small-box-footer">
+                  More info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="col-lg-12 col-6">
+            <!-- small card -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h5> <i class="fas fa-school"></i> SELAMAT DATANG DI DASHBOARD SISWA APLIKASI TEST CBT BERBASIS WEB</h5>
+                  <h5>   SMK MA'ARIF NU 01 PAGUYANGAN </h5> 
+                </div>
+                
+                <a href="#" class="small-box-footer">
+                  <hr>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- /.container-fluid -->
     </div>
