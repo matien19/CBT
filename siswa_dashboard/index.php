@@ -49,8 +49,8 @@ include '../navbar.php';
 
 <?php
 include '../sidebar_siswa.php';
-
-$query_ujian = mysqli_query($con, "SELECT * FROM tbl_guru_tes");
+$nis = $_SESSION['user'];
+$query_ujian = mysqli_query($con, "SELECT * FROM tbl_guru_tes, tbl_siswa WHERE tbl_siswa.nis = '$nis' And tbl_siswa.kode_jurusan = tbl_guru_tes.kode_jurusan AND tbl_siswa.kelas = tbl_guru_tes.kelas");
 $total_ujian = mysqli_num_rows($query_ujian);
 ?>
   <!-- Content Wrapper. Contains page content -->
@@ -69,7 +69,7 @@ $total_ujian = mysqli_num_rows($query_ujian);
                   <p>Ujian</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <i class="fa fa-book-open"></i>
                 </div>
                 <a href="../siswa_ujian" class="small-box-footer">
                   More info <i class="fas fa-arrow-circle-right"></i>

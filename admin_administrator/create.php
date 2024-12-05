@@ -31,7 +31,7 @@ require_once "../database/config.php";
         ';
       } else
       {
-        $pass         = sha1($repassword);
+        $pass         = md5($repassword);
         $nama         = trim(mysqli_real_escape_string($con, $_POST['nama']));
         $peran        = 'admin';
         

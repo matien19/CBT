@@ -66,20 +66,20 @@ $total_klsmk = mysqli_num_rows($query_klsmk);
       <div class="row">
           <div class="col-lg-12">
           <div class="row">
-          <div class="col-lg-4 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3><?=$total_mhs;?></h3>
+            <div class="col-lg-4 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3><?=$total_mhs;?></h3>
 
-                <p>Siswa</p>
+                  <p>Siswa</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-users"></i>
+                </div>
+                <a href="../admin_siswa/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div>
           <!-- ./col -->
           <div class="col-lg-4 col-6">
             <!-- small box -->
@@ -90,9 +90,9 @@ $total_klsmk = mysqli_num_rows($query_klsmk);
                 <p>Guru</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fa fa-user"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="../admin_guru/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -105,9 +105,9 @@ $total_klsmk = mysqli_num_rows($query_klsmk);
                 <p>Mapel</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="fa fa-book"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="../admin_mapel/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

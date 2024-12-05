@@ -71,7 +71,7 @@ $total_ujian = mysqli_num_rows($query_ujian);
                   <p>Ujian</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <i class="fa fa-book-open"></i>
                 </div>
                 <a href="../guru_ujian" class="small-box-footer">
                   More info <i class="fas fa-arrow-circle-right"></i>
