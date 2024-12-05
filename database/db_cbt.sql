@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 13 Agu 2024 pada 11.16
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.0.30
+-- Host: localhost:3306
+-- Generation Time: Dec 05, 2024 at 06:15 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,172 +24,175 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_guru`
+-- Table structure for table `tbl_guru`
 --
 
 CREATE TABLE `tbl_guru` (
   `nip` varchar(30) NOT NULL,
   `nama` varchar(100) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_guru`
+-- Dumping data for table `tbl_guru`
 --
 
 INSERT INTO `tbl_guru` (`nip`, `nama`) VALUES
-('0001', 'Matien Hakim Falahudin Bachtiar'),
-('0002', 'guru 2'),
-('0003', 'guru 3'),
-('0004', 'guru 4'),
-('0005', 'guru 5'),
-('0006', 'guru 6'),
-('0007', 'guru 7');
+('0001', 'Arain dirgantara,s.Kom'),
+('0002', 'Anis Alwi Mubarok,S,Kom'),
+('0003', 'Lutfi Sakti M, S.Kom');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_guru_mapel`
+-- Table structure for table `tbl_guru_mapel`
 --
 
 CREATE TABLE `tbl_guru_mapel` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `nip_guru` varchar(10) NOT NULL,
-  `id_mapel` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `id_mapel` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_guru_mapel`
+-- Dumping data for table `tbl_guru_mapel`
 --
 
 INSERT INTO `tbl_guru_mapel` (`id`, `nip_guru`, `id_mapel`) VALUES
-(27, '0001', 4),
-(26, '0001', 3),
-(7, '0003', 4),
-(9, '0005', 4),
-(10, '0005', 8),
-(25, '0001', 2),
-(24, '0001', 1),
-(28, '0001', 5),
-(29, '0001', 6),
-(30, '0001', 7),
-(31, '0001', 8),
-(35, '2231', 4),
-(34, '2231', 3),
-(36, '2231', 8),
-(37, '0008', 4),
-(38, '0008', 5);
+(1, '0001', 1),
+(2, '0002', 1),
+(3, '0002', 2),
+(4, '0002', 3),
+(5, '0003', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_guru_tes`
+-- Table structure for table `tbl_guru_tes`
 --
 
 CREATE TABLE `tbl_guru_tes` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `id_guru` varchar(10) NOT NULL,
-  `id_mapel` int(11) NOT NULL,
+  `id_mapel` int NOT NULL,
   `kelas` varchar(200) NOT NULL,
   `nama_ujian` varchar(200) NOT NULL,
-  `jumlah_soal` int(11) NOT NULL,
+  `jumlah_soal` int NOT NULL,
   `kode_jurusan` varchar(20) NOT NULL,
-  `waktu` int(11) NOT NULL,
+  `waktu` int NOT NULL,
   `jenis` enum('acak','set') NOT NULL,
   `tgl_mulai` datetime NOT NULL,
   `terlambat` datetime NOT NULL,
   `token` varchar(5) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_guru_tes`
+-- Dumping data for table `tbl_guru_tes`
 --
 
 INSERT INTO `tbl_guru_tes` (`id`, `id_guru`, `id_mapel`, `kelas`, `nama_ujian`, `jumlah_soal`, `kode_jurusan`, `waktu`, `jenis`, `tgl_mulai`, `terlambat`, `token`) VALUES
-(1, '0001', 3, 'X', 'UAS', 4, 'IPS', 1, 'set', '2024-08-13 11:53:00', '2024-08-16 11:54:00', 'TIXMG'),
-(2, '0001', 4, 'X', 'UAS', 8, 'A001', 3, 'set', '2024-08-13 14:55:00', '2024-08-23 14:55:00', 'TKPGQ'),
-(3, '0001', 1, 'XI', 'UTSS', 10, 'A003', 10, 'set', '2024-08-12 14:34:00', '2024-08-16 13:34:00', 'SMQPV'),
-(4, '0001', 3, 'X', 'UAS', 10, 'A001', 200, 'set', '2024-08-13 13:17:00', '2024-08-16 13:17:00', 'MLWQV');
+(1, '0001', 1, 'X', 'UAS', 10, 'A1', 10, 'set', '2024-12-06 00:01:00', '2024-12-06 00:01:00', 'ZRGJB'),
+(2, '0001', 1, 'X', 'UAS', 16, 'A1', 100, 'set', '2024-12-31 08:14:00', '2025-02-08 08:14:00', 'FVOMH'),
+(3, '0001', 1, 'X', 'UAS', 20, 'A1', 100, 'set', '2024-12-06 00:15:00', '2024-12-31 00:15:00', 'RVECZ'),
+(4, '0002', 3, 'X', 'UAS', 1, 'A3', 10, 'set', '2024-12-06 01:23:00', '2024-12-10 01:23:00', 'SVCPR');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_ikut_ujian`
+-- Table structure for table `tbl_ikut_ujian`
 --
 
 CREATE TABLE `tbl_ikut_ujian` (
-  `id` int(11) NOT NULL,
-  `id_tes` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `id_tes` int NOT NULL,
   `id_user` varchar(50) NOT NULL DEFAULT '',
-  `jml_benar` int(11) DEFAULT 0,
-  `nilai` decimal(10,2) DEFAULT 0.00,
+  `jml_benar` int DEFAULT '0',
+  `nilai` decimal(10,2) DEFAULT '0.00',
   `tgl_mulai` datetime NOT NULL,
   `tgl_selesai` datetime DEFAULT NULL,
-  `status` enum('ujian','selesai') DEFAULT 'ujian'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `status` enum('ujian','selesai','terlambat') CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT 'ujian'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_ikut_ujian`
+-- Dumping data for table `tbl_ikut_ujian`
 --
 
 INSERT INTO `tbl_ikut_ujian` (`id`, `id_tes`, `id_user`, `jml_benar`, `nilai`, `tgl_mulai`, `tgl_selesai`, `status`) VALUES
-(14, 4, '42421071', 0, 0.00, '2024-08-13 15:26:45', '2024-08-13 15:37:06', 'selesai');
+(1, 1, '5280', 0, '0.00', '2024-12-06 00:13:39', NULL, 'terlambat'),
+(2, 3, '5280', 5, '25.00', '2024-12-06 00:18:07', '2024-12-06 00:18:53', 'selesai');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_jawaban`
+-- Table structure for table `tbl_jawaban`
 --
 
 CREATE TABLE `tbl_jawaban` (
-  `id` int(11) NOT NULL,
-  `id_tes` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_soal` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `id_tes` int NOT NULL,
+  `id_user` varchar(50) NOT NULL DEFAULT '',
+  `id_soal` int NOT NULL,
   `jawaban` varchar(2) NOT NULL DEFAULT ''
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=FIXED;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=FIXED;
 
 --
--- Dumping data untuk tabel `tbl_jawaban`
+-- Dumping data for table `tbl_jawaban`
 --
 
 INSERT INTO `tbl_jawaban` (`id`, `id_tes`, `id_user`, `id_soal`, `jawaban`) VALUES
-(1, 4, 42421071, 2, 'C'),
-(2, 4, 42421071, 3, 'A'),
-(3, 4, 42421071, 4, 'A'),
-(4, 4, 42421071, 5, 'A');
+(1, 3, '5280', 1, 'A'),
+(2, 3, '5280', 2, 'A'),
+(3, 3, '5280', 3, 'A'),
+(4, 3, '5280', 4, 'A'),
+(5, 3, '5280', 5, 'A'),
+(6, 3, '5280', 6, 'A'),
+(7, 3, '5280', 7, 'B'),
+(8, 3, '5280', 8, 'B'),
+(9, 3, '5280', 9, 'A'),
+(10, 3, '5280', 10, 'A'),
+(11, 3, '5280', 11, 'A'),
+(12, 3, '5280', 20, 'A'),
+(13, 3, '5280', 19, 'A'),
+(14, 3, '5280', 18, 'A'),
+(15, 3, '5280', 17, 'A'),
+(16, 3, '5280', 16, 'A'),
+(17, 3, '5280', 15, 'B'),
+(18, 3, '5280', 14, 'B'),
+(19, 3, '5280', 13, 'A'),
+(20, 3, '5280', 12, 'A');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_jurusan`
+-- Table structure for table `tbl_jurusan`
 --
 
 CREATE TABLE `tbl_jurusan` (
-  `kode_jurusan` varchar(10) NOT NULL,
-  `nama` varchar(50) NOT NULL
+  `kode_jurusan` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `tbl_jurusan`
+-- Dumping data for table `tbl_jurusan`
 --
 
 INSERT INTO `tbl_jurusan` (`kode_jurusan`, `nama`) VALUES
-('A003', 'IPS'),
-('A001', 'IPA');
+('A1', 'TKJ'),
+('A2', 'TKR'),
+('A3', 'RPL');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_kelas`
+-- Table structure for table `tbl_kelas`
 --
 
 CREATE TABLE `tbl_kelas` (
-  `id` int(11) NOT NULL,
-  `kelas` varchar(4) NOT NULL
+  `id` int NOT NULL,
+  `kelas` varchar(4) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `tbl_kelas`
+-- Dumping data for table `tbl_kelas`
 --
 
 INSERT INTO `tbl_kelas` (`id`, `kelas`) VALUES
@@ -200,31 +203,91 @@ INSERT INTO `tbl_kelas` (`id`, `kelas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_mapel`
+-- Table structure for table `tbl_mapel`
 --
 
 CREATE TABLE `tbl_mapel` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `nama` varchar(100) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_mapel`
+-- Dumping data for table `tbl_mapel`
 --
 
 INSERT INTO `tbl_mapel` (`id`, `nama`) VALUES
-(1, 'B indonesia'),
-(2, 'IPA'),
-(3, 'B Inggris'),
-(4, 'IPS'),
-(5, 'TKJ'),
-(6, 'TKR'),
-(7, 'TSM');
+(1, 'tkj'),
+(2, 'B..inggris'),
+(3, 'B. Indonesia');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_siswa`
+-- Table structure for table `tbl_paket_soal`
+--
+
+CREATE TABLE `tbl_paket_soal` (
+  `id_ujian` int DEFAULT NULL,
+  `id_soal` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `tbl_paket_soal`
+--
+
+INSERT INTO `tbl_paket_soal` (`id_ujian`, `id_soal`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4),
+(2, 5),
+(2, 6),
+(2, 7),
+(2, 8),
+(2, 9),
+(2, 10),
+(2, 11),
+(2, 12),
+(2, 13),
+(2, 14),
+(2, 15),
+(2, 16),
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 4),
+(3, 5),
+(3, 6),
+(3, 7),
+(3, 8),
+(3, 9),
+(3, 10),
+(3, 11),
+(3, 12),
+(3, 13),
+(3, 14),
+(3, 15),
+(3, 16),
+(3, 17),
+(3, 18),
+(3, 19),
+(3, 20),
+(4, 51);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_siswa`
 --
 
 CREATE TABLE `tbl_siswa` (
@@ -233,43 +296,43 @@ CREATE TABLE `tbl_siswa` (
   `kelas` varchar(50) NOT NULL,
   `kode_jurusan` varchar(100) NOT NULL,
   `stat` enum('A','T') NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_siswa`
+-- Dumping data for table `tbl_siswa`
 --
 
 INSERT INTO `tbl_siswa` (`nis`, `nama`, `kelas`, `kode_jurusan`, `stat`) VALUES
-('42421054', 'Auliya Fitra Sabila', 'X', 'A001', 'A'),
-('42421055', 'Bayu Aji Assidiq', 'X', 'A001', 'A'),
-('42421056', 'Candrasa Asmaradanta', 'X', 'A001', 'A'),
-('42421057', 'Eko Gunawan', 'X', 'A001', 'A'),
-('42421059', 'Farchanul Umam', 'X', 'A001', 'A'),
-('42421060', 'Fatkhan Rizqi Amrulloh', 'X', 'A001', 'A'),
-('42421061', 'Femulia Arifka Nanda', 'X', 'A001', 'A'),
-('42421088', 'Ikrimatul A\'la', 'X', 'A001', 'A'),
-('42421063', 'Hadi Saputra Arifin', 'X', 'A001', 'A'),
-('42421064', 'Ihzamulloh', 'X', 'A001', 'A'),
-('42421065', 'Irbah Izazi', 'X', 'A001', 'A'),
-('42421066', 'Khaqi Noer Oktavian Majid', 'X', 'A001', 'A'),
-('42421067', 'Krisdianto', 'X', 'A001', 'A'),
-('42421068', 'Lilis Suryani', 'X', 'A001', 'A'),
-('42421069', 'M. Noval Najib', 'X', 'A001', 'A'),
-('42421070', 'M. Yusuf Al Qaradlawi', 'X', 'A001', 'A'),
-('42421071', 'Matien Hakim Falahudin Bachtiar', 'X', 'A001', 'A'),
-('42321018', 'Naylu Syifa', 'XII', 'A001', 'A');
+('5280', 'ALIFIA TAZKIA', 'X', 'A1', 'A'),
+('5282', 'ARJUWAN AREVI', 'X', 'A1', 'A'),
+('5281', 'AURALIA ZAHRA GLADI', 'X', 'A1', 'A'),
+('5283', 'DESWITA DIANTI N ', 'X', 'A1', 'A'),
+('5284', 'DEVA MAULANA', 'X', 'A1', 'A'),
+('5285', 'DIKI AFANDI', 'X', 'A1', 'A'),
+('5286', 'DINA LUTFIYANI ', 'X', 'A1', 'A'),
+('5287', 'ERINA RIZKA FITRIANI', 'X', 'A1', 'A'),
+('5288', 'EVELLYN AURA MAULIDA', 'X', 'A1', 'A'),
+('5289', 'FAIQHUBBAFI AHMAD', 'X', 'A1', 'A'),
+('5290', 'FANDILI SETIA DWI YANTO', 'X', 'A1', 'A'),
+('5291', 'FAREL DWI AVANDI', 'X', 'A1', 'A'),
+('5292', 'GAURI YANITA ALMAISYAH', 'X', 'A1', 'A'),
+('5293', 'HAZBULLAH AZEEM', 'X', 'A1', 'A'),
+('5294', 'HERLINA TRI AMPERA', 'X', 'A1', 'A'),
+('5296', 'ISNAENI LINDA AOLIA', 'X', 'A1', 'A'),
+('5297', 'MAYZA ZAKIA RAKHMA ', 'X', 'A1', 'A'),
+('5298', 'MEISA NUR KHOLIFAH', 'X', 'A1', 'A');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_soal`
+-- Table structure for table `tbl_soal`
 --
 
 CREATE TABLE `tbl_soal` (
-  `id` int(11) NOT NULL,
-  `id_guru` varchar(10) NOT NULL,
-  `id_mapel` int(11) NOT NULL,
-  `kelas` varchar(5) NOT NULL,
+  `id` int NOT NULL,
+  `id_guru` varchar(10) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `id_mapel` int NOT NULL,
+  `kelas` varchar(5) COLLATE utf8mb3_unicode_ci NOT NULL,
   `file` varchar(150) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `tipe_file` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `soal` longtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
@@ -280,82 +343,123 @@ CREATE TABLE `tbl_soal` (
   `opsi_e` longtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `jawaban` varchar(5) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `tgl_input` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Dumping data untuk tabel `tbl_soal`
+-- Dumping data for table `tbl_soal`
 --
 
 INSERT INTO `tbl_soal` (`id`, `id_guru`, `id_mapel`, `kelas`, `file`, `tipe_file`, `soal`, `opsi_a`, `opsi_b`, `opsi_c`, `opsi_d`, `opsi_e`, `jawaban`, `tgl_input`) VALUES
-(2, '0001', 3, 'X', '-', '-', '<p>Soal <strong>1 </strong><i><strong>b.ing </strong></i><span style=\"color:hsl(30, 75%, 60%);\"><i><strong>??</strong></i></span></p>', '<p><strong>A</strong></p>', '<p><strong>B</strong></p>', '<p><strong>C</strong></p>', '<p><strong>D</strong></p>', '<p><strong>E</strong></p>', 'B', '2024-08-12 11:12:40'),
-(3, '0001', 3, 'X', '-', '-', '<p>Soal <strong>2&nbsp;</strong><i><strong> B.ing&nbsp;</strong></i></p>', '<p><strong>A</strong></p>', '<p><strong>B</strong></p>', '<p><strong>C</strong></p>', '<p><strong>D</strong></p>', '<p><strong>E</strong></p>', 'C', '2024-08-12 11:14:49'),
-(4, '0001', 3, 'X', '-', '-', '<p>Soal <strong>3 </strong><i><strong>B.ing</strong></i></p>', '<p><strong>A</strong></p>', '<p><strong>B</strong></p>', '<p><strong>C</strong></p>', '<p><strong>D</strong></p>', '<p><strong>E</strong></p>', 'C', '2024-08-12 11:16:07'),
-(5, '0001', 3, 'X', '-', '-', '<p>Soal <strong>4 </strong><i><strong>B.ing</strong></i></p>', '<p><strong>A</strong></p>', '<p><strong>B</strong></p>', '<p><strong>C</strong></p>', '<p><strong>D</strong></p>', '<p><strong>E</strong></p>', 'B', '2024-08-12 13:53:45'),
-(6, '0001', 4, 'X', '-', '-', '<p>Soal <strong>7&nbsp;</strong><i><strong> B.ing ?</strong></i></p>', '<p><strong>A</strong></p>', '<p><strong>B</strong></p>', '<p><strong>C</strong></p>', '<p><strong>D</strong></p>', '<p><strong>E</strong></p>', 'A', '2024-08-13 12:36:15');
+(1, '0001', 1, 'X', '-', '-', '<p>Jenis kabel dibawah ini yang digunakan pada topologi bus adalah ……</p>', '<p>UTP</p>', '<p>Coaxial</p>', '<p>STP</p>', '<p>Kabel Data</p>', '<p>Fiber Optic</p>', 'B', '2024-12-06 00:00:52'),
+(2, '0001', 1, 'X', '-', '-', '<p>Permasalah yang timbul pada jalur utama topologi bus adalah ……</p>', '<p>Data tidak sampai tujuan</p>', '<p>Terjadi tabrakan data (Collision)</p>', '<p>Kecepatan transfer data rendah</p>', '<p>Terjadinya kerusakan pada hub</p>', '<p>Boros kabel</p>', 'B', '2024-12-06 00:00:52'),
+(3, '0001', 1, 'X', '-', '-', '<p>Bagaimana pengaruh terhadap computer lain apabila salah satu konektor BNC\nputus?</p>', '<p>Kecepatan transfer data meningkat</p>', '<p>Kecepatan transfer data menurun</p>', '<p>Tidak ada pengaruh</p>', '<p>Tidak dapat terkoneksi ke jaringan</p>', '<p>Terjadi kerusakan pada NIC</p>', 'E', '2024-12-06 00:00:52'),
+(4, '0001', 1, 'X', '-', '-', '<p>Besar hambatan terminator yang digunakan pada topologi bus adalah ….</p>', '<p>10 Ohm</p>', '<p>75 Ohm</p>', '<p>25 Ohm</p>', '<p>100 Ohm</p>', '<p>50 Ohm</p>', 'E', '2024-12-06 00:00:52'),
+(5, '0001', 1, 'X', '-', '-', '<p>Central node pada topologi star berupa …..</p>', '<p>Repeater</p>', '<p>Switch/hub</p>', '<p>Konektor</p>', '<p>Router</p>', '<p>Kabel</p>', 'B', '2024-12-06 00:00:52'),
+(6, '0001', 1, 'X', '-', '-', '<p>Kecepatan maksimum kartu jaringan jenis ISA pada topologi star adalah ……</p>', '<p>5 Mbps</p>', '<p>10 Mbps</p>', '<p>15 Mbps</p>', '<p>20 Mbps</p>', '<p>25 Mbps</p>', 'B', '2024-12-06 00:00:52'),
+(7, '0001', 1, 'X', '-', '-', '<p>Repeater dipasang jika jarak kabel UTP sudah lebih dari …..</p>', '<p>100 m</p>', '<p>200 m</p>', '<p>300 m</p>', '<p>400 m</p>', '<p>500 m</p>', 'A', '2024-12-06 00:00:52'),
+(8, '0001', 1, 'X', '-', '-', '<p>Fungsi dari tang Crimping pada pemasangan kabel UTP adalah ….</p>', '<p>Memotong kabel</p>', '<p>Mengelupas kabel</p>', '<p>Meratakan kabel</p>', '<p>Mengunci konektor</p>', '<p>Semua jawaban benar</p>', 'E', '2024-12-06 00:00:52'),
+(9, '0001', 1, 'X', '-', '-', '<p>Pada pemasangan kabel straight, pin yang digunakan untuk mengirim (transferring)\ndata adalah …..</p>', '<p>1 dan 2</p>', '<p>6 dan 8</p>', '<p>4 dan 5</p>', '<p>3 dan 6</p>', '<p>3 dan 8</p>', 'A', '2024-12-06 00:00:52'),
+(10, '0001', 1, 'X', '-', '-', '<p>Pada pemasangan kabel straight, pin yang digunakan untuk menerima (recieving)\ndata adalah …..</p>', '<p>1 dan 2</p>', '<p>6 dan 8</p>', '<p>4 dan 5</p>', '<p>3 dan 6</p>', '<p>3 dan 8</p>', 'D', '2024-12-06 00:00:52'),
+(11, '0001', 1, 'X', '-', '-', '<p>Pemasangan kabel secara straight pada kabel UTP digunakan untuk\nmenghubungkan …..</p>', '<p>Komputer dengan computer</p>', '<p>Komputer dengan hub/switch</p>', '<p>Switch dengan router</p>', '<p>Hub dengan Repeater</p>', '<p>Client dengan Server</p>', 'B', '2024-12-06 00:00:52'),
+(12, '0001', 1, 'X', '-', '-', '<p>Apabila NIC sudah terinsall dengan baik, maka dapat dilihat meelalui ….</p>', '<p>Device manager dan Add/remove hardware</p>', '<p>Control panel dan Add/remove windows component</p>', '<p>Windows explorer dan regedit</p>', '<p>Network connection dan device manager</p>', '<p>My network places dan dxdiag</p>', 'A', '2024-12-06 00:00:52'),
+(13, '0001', 1, 'X', '-', '-', '<p>Mengapa alamat IP dengan octet pertama 127 tidak digunakan di kelas A?</p>', '<p>Sebagai cadangan untuk penelitian</p>', '<p>Merupakan IP khusus yang hanya dimiliki oleh server</p>', '<p>Merupakan IP LoopBack untuk untuk setiap computer yang ada</p>', '<p>Merupakan IP yang digunakan untuk keperluan routing jaringan</p>', '<p>Merupakan IP yang bersifat public untuk jaringan internet</p>', 'C', '2024-12-06 00:00:52'),
+(14, '0001', 1, 'X', '-', '-', '<p>Sebuah jaringan computer dengan jumlah computer 43. Maka subnet mask yang\ndigunakan adalah …..</p>', '<p>255.255.255.0</p>', '<p>255.255.255.128</p>', '<p>255.255.255.192</p>', '<p>255.255.255.224</p>', '<p>255.255.255.240</p>', 'C', '2024-12-06 00:00:52'),
+(15, '0001', 1, 'X', '-', '-', '<p>Dalam pengalamatan IP Address, isian DNS berfungsi untuk …..</p>', '<p>Menerjemahkan alamat IP ke alamat domain</p>', '<p>Koneksi ke jaringan</p>', '<p>Menghubungkan dua workgroup</p>', '<p>Koneksi dengan jaringan Client Server</p>', '<p>Koneksi dengan /Hostpot</p>', 'A', '2024-12-06 00:00:52'),
+(16, '0001', 1, 'X', '-', '-', '<p>Dibawah ini merupakan contoh koneksitas jaringan yang paling bagus adalah ……</p>', '<p>Reply from 192.168.1.1: bytes=32 time=10ms TTL=64</p>', '<p>Reply from 192.168.1.2: bytes=32 time=15ms TTL=64</p>', '<p>Reply from 192.168.1.3: bytes=32 time=20ms TTL=64</p>', '<p>Reply from 192.168.1.4: bytes=32 time=25ms TTL=64</p>', '<p>Reply from 192.168.1.5: bytes=32 time=50ms TTL=64</p>', 'A', '2024-12-06 00:00:52'),
+(17, '0001', 1, 'X', '-', '-', '<p>Permasalahan yang mungkin terjadi pada software dalam koneksitas jaringan adalah\nberikut ini, kecuali…..</p>', '<p>Setting konfigurasi jaringan tidak benar</p>', '<p>Kesalahan nama Workgroup pada komputer</p>', '<p>Protokol yang tidak cocok</p>', '<p>Network Interface Card (NIC) rusak/mati</p>', '<p>Kesalahan service network</p>', 'D', '2024-12-06 00:00:52'),
+(18, '0001', 1, 'X', '-', '-', '<p>Untuk mengetahui koneksi komputer ke switch / hub, dapat dilakukan dengan\nmengecek suatu hal yang berikut ini, kecuali …Untuk mengetahui koneksi komputer ke switch / hub, dapat dilakukan dengan\nmengecek suatu hal yang berikut ini, kecuali …</p>', '<p>Lampu indikator switch / hub</p>', '<p>Kabel LAN</p>', '<p>Lampu indikator LAN Card</p>', '<p>IP Address</p>', '<p>Server</p>', 'E', '2024-12-06 00:00:52'),
+(19, '0001', 1, 'X', '-', '-', '<p>Untuk mengakses CDROM yang ada didrive E dengan Ip address 192.168.103.2 dari\nkomputer orang lain yang sudah disharing, contoh isian di baris Open yang benar\nadalah…</p>', '<p>\\192.168.103.2E</p>', '<p>\\ServerE</p>', '<p>//192.168.103.2/E</p>', '<p>D. //SMKN JMTN/E</p>', '<p>\\192.168.103.2/E</p>', 'A', '2024-12-06 00:00:52'),
+(20, '0001', 1, 'X', '-', '-', '<p>Di bawah ini yang termasuk system operasi berbasis GUI kecuali ……..</p>', '<p>Mickrotik</p>', '<p>Apple</p>', '<p>Macintosh</p>', '<p>Windows</p>', '<p>Ubuntu</p>', 'A', '2024-12-06 00:00:52'),
+(21, '0001', 1, 'X', '-', '-', '<p>Di bawah ini adalah jenis-jenis sistem operasi, kecuali…..</p>', '<p>Ubuntu</p>', '<p>Windows XP</p>', '<p>Mac OS</p>', '<p>Cytrix</p>', '<p>Red Hat</p>', 'D', '2024-12-06 00:00:52'),
+(22, '0001', 1, 'X', '-', '-', '<p>Sebuah jaringan computer dengan jumlah computer 43 maka memiliki subnet mask\nyang digunakan…</p>', '<p>255.255.255.0</p>', '<p>255.255.255.24</p>', '<p>255.255.255.192</p>', '<p>255.255.255.250</p>', '<p>255.255.255.254</p>', 'C', '2024-12-06 00:00:52'),
+(23, '0001', 1, 'X', '-', '-', '<p>Panjang Net id pada kelas A</p>', '<p>8 bit</p>', '<p>16 bit</p>', '<p>24 bit</p>', '<p>64 bit</p>', '<p>32 bit</p>', 'A', '2024-12-06 00:00:52'),
+(24, '0001', 1, 'X', '-', '-', '<p>Panjang Host ID pada kelas B</p>', '<p>8 bit</p>', '<p>16 bit</p>', '<p>24 bit</p>', '<p>64 bit</p>', '<p>32 bit</p>', 'B', '2024-12-06 00:00:52'),
+(25, '0001', 1, 'X', '-', '-', '<p>Perintah untuk mengetahui jalur / rute suatu domain komputer / website menggunakan pada system Linux adalah ………</p>', '<p>Ping</p>', '<p>Traceroute</p>', '<p>Tracert</p>', '<p>Ipconfig</p>', '<p>Ifconfig</p>', 'C', '2024-12-06 00:00:52'),
+(26, '0001', 1, 'X', '-', '-', '<p>Perangkat keras yang digunakan untuk menyatukan kabel-kabel network dari tiap-tiap\nworkstation atau perangkat lainnya dalam jaringan disebut..........</p>', '<p>Concentrator</p>', '<p>Lan Card</p>', '<p>Modem</p>', '<p>USB</p>', '<p>Wireless</p>', 'A', '2024-12-06 00:00:52'),
+(27, '0001', 1, 'X', '-', '-', '<p>Topologi jaringan komputer yang menggunakan BNC (T) sebagai konektornya\nadalah....</p>', '<p>Topologi Bus</p>', '<p>Topologi Coaxia</p>', '<p>Topologi Ring</p>', '<p>Topologi Star,</p>', '<p>Topologi Workstation</p>', 'A', '2024-12-06 00:00:52'),
+(28, '0001', 1, 'X', '-', '-', '<p>Dibawah ini salah satu protokol internet yang sering digunakan untuk mentranfer data atau file adalah…</p>', '<p>DNS</p>', '<p>Sosial Media</p>', '<p>FTP</p>', '<p>HTTP</p>', '<p>SMTP</p>', 'C', '2024-12-06 00:00:52'),
+(29, '0001', 1, 'X', '-', '-', '<p>Salah satu keuntungan jaringan komputer menggunakan topologi bus adalah ….</p>', '<p>Deteksi dan isolasi kesalahan sangat kecil</p>', '<p>Pengembangan jaringan atau penambahan workstation baru dapat dilakukan\ndengan mudah tanpa menggangu workstation lain.</p>', '<p>Kepadatan lalu lintas pada jalur utama</p>', '<p>Diperlukan repeater untuk jarak jauh</p>', '<p>Lay out kabel kompleks</p>', 'C', '2024-12-06 00:00:52'),
+(30, '0001', 1, 'X', '-', '-', '<p>Agar penggunaan kabel coaxial jenis thinnet optimal maka setiap ujung harus\nditerminasi dengan....</p>', '<p>Pembungkus kaber (isolator)</p>', '<p>T-Connector 0,5 meter</p>', '<p>Terminator 50-ohm</p>', '<p>Terminator 500-ohm</p>', '<p>Transceiver External</p>', 'C', '2024-12-06 00:00:52'),
+(31, '0001', 1, 'X', '-', '-', '<p>Perintah “PING” pada jaringan digunakan untuk hal-hal yang berikut ini, kecuali....</p>', '<p>Menguji fungsi kirim sebuah NIC</p>', '<p>Menguji fungsi terima sebuahNIC</p>', '<p>Menguji kesesuaian sebuah NIC</p>', '<p>Menguji konfigurasi TCP/IP</p>', '<p>Menguji koneksi jaringan</p>', 'C', '2024-12-06 00:00:52'),
+(32, '0001', 1, 'X', '-', '-', '<p>Untuk melihat konfigurasi alamat IP pada sebuah komputer digunakan perintah....</p>', '<p>Ip all</p>', '<p>Ipall</p>', '<p>p config</p>', '<p>Ipconfig</p>', '<p>Ipconfigurasi</p>', 'D', '2024-12-06 00:00:52'),
+(33, '0001', 1, 'X', '-', '-', '<p>Apakan kepanjangan dari DHCP…</p>', '<p>Dinamis Host Configurasi Protocol.</p>', '<p>Dinamis Host Configurasi Protocol.</p>', '<p>Dynamic Hosting Confidenci Protocol</p>', '<p>Dinamic Host Confidenci Protocol.</p>', '<p>Dynamic Host Configuration Protocol.</p>', 'E', '2024-12-06 00:00:52'),
+(34, '0001', 1, 'X', '-', '-', '<p> Dalam pengalamatan IP Address, Isian DNS berfungsi untuk…</p>', '<p>Koneksi ke jaringan internet</p>', '<p>Koneksi ke jaringan internet</p>', '<p>Menghubungkan 2 workgroup</p>', '<p>Koneksi dengan jaringan Client server</p>', '<p>Koneksi dengan Hotspot</p>', 'A', '2024-12-06 00:00:52'),
+(35, '0001', 1, 'X', '-', '-', '<p>Jenis IP address untuk jaringan berukuran kecil atau Local Area Network adalah....</p>', '<p>Kelas A</p>', '<p>Kelas B</p>', '<p>Kelas C</p>', '<p>Kelas A dan B</p>', '<p>Kelas B dan C</p>', 'C', '2024-12-06 00:00:52'),
+(36, '0001', 1, 'X', '-', '-', '<p>Tujuan dibentuknya workgroup</p>', '<p>Mempermudah pengalamatan IP</p>', '<p>Mempermudah transfer data</p>', '<p>Mempermudah sharing data</p>', '<p>Mempermudah koneksi internet</p>', '<p>Mempermudah pengelolaan jaringan</p>', 'C', '2024-12-06 00:00:52'),
+(37, '0001', 1, 'X', '-', '-', '<p>Dalam konfigurasi berbagi pakai koneksi internet (internet connection sharing),\nkomputer yang tersambung dengan internet akan berfungsi sebagai....</p>', '<p>client</p>', '<p>dump</p>', '<p>router</p>', '<p>switch</p>', '<p>server / gateway</p>', 'A', '2024-12-06 00:00:52'),
+(38, '0001', 1, 'X', '-', '-', '<p>Pemasangan NIC pada computer tidak plug and play disebabkan…</p>', '<p>Belum ada driver NIC pada OS</p>', '<p>NIC bertipe ISA</p>', '<p>NIC bertipe PCI</p>', '<p>NIC rusak</p>', '<p>NIC bertipe AGP</p>', 'A', '2024-12-06 00:00:52'),
+(39, '0001', 1, 'X', '-', '-', '<p>Pada pemasangan kabel straight, pin yang digunakan untuk mengirim (transmit) data\nadalah..</p>', '<p>1 dan 2</p>', '<p>4 dan 5</p>', '<p>3 dan 8</p>', '<p>7 dan 6</p>', '<p>3 dan 6</p>', 'E', '2024-12-06 00:00:52'),
+(40, '0001', 1, 'X', '-', '-', '<p>Kombinasi pengkabelan straight pada jaringan komputer yang sesuai dengan\nstandart internasional adalah....</p>', '<p>White orange – orange - white green – blue - white blue - green – white\nbrown - brown</p>', '<p>White orange – orange - white green – green - white blue - blue – white brown -\nbrown</p>', '<p>White green – green - white orange – blue - white blue - orange – white brown - brown</p>', '<p>White orange – orange - white green - green - white blue - blue – white brown - brown</p>', '<p>Orange – white orange – green – white green - white blue - blue – white brown – brown</p>', 'A', '2024-12-06 00:00:52'),
+(41, '0001', 1, 'X', '-', '-', '<p>PING merupakan perintah yang digunakan untuk…</p>', '<p>Menguji koneksi jaringan</p>', '<p>Melihat Mac Address</p>', '<p>Menghapus history Browser</p>', '<p>Menstransfer file antara jaringan</p>', '<p>Melihat komputer terinfeksi virus atau tidak</p>', 'A', '2024-12-06 00:00:52'),
+(42, '0001', 1, 'X', '-', '-', '<p>Bagian Komputer terbagi menjadi 3 yaitu…</p>', '<p>Software -  Hardware -  Output</p>', '<p>Hardware - Software - Brainware</p>', '<p>Harddisk - Monitor -  VGA</p>', '<p>Input - Proses - Output</p>', '<p>Input - Komputer -  Output</p>', 'B', '2024-12-06 00:00:52'),
+(43, '0001', 1, 'X', '-', '-', '<p>Setiap komputer yang terhubung ke jaringan dapat bertindak baik sebagai workstation maupun server disebut jaringan …</p>', '<p>Peer to peer</p>', '<p>Client and server</p>', '<p>Local Area Network</p>', '<p>Bus</p>', '<p>Tree</p>', 'E', '2024-12-06 00:00:52'),
+(44, '0001', 1, 'X', '-', '-', '<p>Salah satu tipe jaringan komputer yang umum dijumpai adalah….</p>', '<p>Star</p>', '<p>Bus</p>', '<p>WAN</p>', '<p>Wireless</p>', '<p>Client-server</p>', 'E', '2024-12-06 00:00:52'),
+(45, '0001', 1, 'X', '-', '-', '<p>Setelah kita menginstall sistem operasi Windows, hal yang harus dilakukan berikutnya adalah</p>', '<p>Menginstall driver</p>', '<p>Menginstall photoshop</p>', '<p>Menginstall VirtualBox</p>', '<p>Mengubah Wallpaper</p>', '<p>Merakit Komputer</p>', 'A', '2024-12-06 00:00:52'),
+(46, '0001', 1, 'X', '-', '-', '<p>Satuan informasi terkecil yang dikenal dalam komunikasi data dibawah ini adalah…</p>', '<p>Bit</p>', '<p> Byte</p>', '<p>Mbps</p>', '<p>GB</p>', '<p>Segment</p>', 'A', '2024-12-06 00:00:52'),
+(47, '0001', 1, 'X', '-', '-', '<p>1 Terabyte sama dengan…</p>', '<p>1000 Gigabyte</p>', '<p>1200 Gigabyte</p>', '<p>4000 Gigabyte</p>', '<p>2300 Gigabyte</p>', '<p>500 Gigabyte</p>', 'A', '2024-12-06 00:00:52'),
+(48, '0001', 1, 'X', '-', '-', '<p>Mail Transfer Protocol (SMTP) adalah protokol pada jaringan internet yang berfungsi untuk..</p>', '<p>Menerima email</p>', '<p>Menambahkan IP Address</p>', '<p>Membuat database email</p>', '<p>Mengirimkan pesan email agar tepat waktu dan efisien kepada penerima</p>', '<p>Mengumpulkan email yang masuk</p>', 'D', '2024-12-06 00:00:52'),
+(49, '0001', 1, 'X', '-', '-', '<p>Suatu sistem yang memungkinkan nama suatu host pada jaringan komputer atau internet ditranslasikan menjadi IP address disebut ….</p>', '<p>DNS</p>', '<p>Gateway</p>', '<p>Protokol</p>', '<p>DHCP</p>', '<p>Ipconfig</p>', 'A', '2024-12-06 00:00:52'),
+(50, '0001', 1, 'X', '-', '-', '<p>Yang bukan merupakan varian sistem operasi jaringan berbasis GUI yang menggunakan basis Linux adalah…..</p>', '<p>Redhat</p>', '<p>Mandrake</p>', '<p>Caldera</p>', '<p>Debian</p>', '<p>Fortran</p>', 'E', '2024-12-06 00:00:52'),
+(51, '0002', 3, 'X', '-', '-', '<p>soal <strong>Indoneisa</strong></p>', '<p>Indonesia A</p>', '<p>Indonesia B</p>', '<p>Indonesia C</p>', '<p>Indonesia D</p>', '<p>Indonesia E</p>', 'B', '2024-12-06 00:22:59');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_user`
+-- Table structure for table `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `peran` enum('admin','guru','siswa') NOT NULL,
   `nama` varchar(50) NOT NULL,
   `aktivasi` enum('A','T') NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_user`
+-- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`id`, `username`, `password`, `peran`, `nama`, `aktivasi`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'Admin', 'A'),
-(114, '42421059', '4da872dc27d16a2e1288eb75c5db3c5f', 'siswa', 'Farchanul Umam', 'A'),
-(3, 'tien', '8cb2237d0679ca88db6464eac60da96345513964', 'admin', 'tien', 'A'),
-(126, '42421071', 'e81c3882d9ca22944a793c61dcbbe897', 'siswa', 'Matien Hakim Falahudin Bachtiar', 'A'),
-(125, '42421070', '3b504e4ec694a6dfc6398f882e5add6c', 'siswa', 'M. Yusuf Al Qaradlawi', 'A'),
-(124, '42421069', 'd6764c8d9c6d2c4c23e7aee9f4cdddc8', 'siswa', 'M. Noval Najib', 'A'),
-(123, '42421068', '75c1f590552b4b663c71d22e876d06df', 'siswa', 'Lilis Suryani', 'A'),
-(122, '42421067', '8e892c5b79e5d5af43f313cdd265f6ad', 'siswa', 'Krisdianto', 'A'),
-(121, '42421066', '9562e2397bbeca59a4db74ae799a990f', 'siswa', 'Khaqi Noer Oktavian Majid', 'A'),
-(120, '42421065', 'df3f00f5779fce667287437ad4f501c8', 'siswa', 'Irbah Izazi', 'A'),
-(118, '42421063', 'eca6a6051b31ef9d82d86fab1ec6fae5', 'siswa', 'Hadi Saputra Arifin', 'A'),
-(119, '42421064', '20e59015d7ca918564b6c828b10c68b8', 'siswa', 'Ihzamulloh', 'A'),
-(117, '42421088', '1af6c762d9574b96e0f4859f7dacbe7c', 'siswa', 'Ikrimatul A\'la', 'A'),
-(116, '42421061', 'f212edd7717f6d58756dc1968c869ec9', 'siswa', 'Femulia Arifka Nanda', 'A'),
-(115, '42421060', '03a23fdb7f8d63ef96959b6fa4103de1', 'siswa', 'Fatkhan Rizqi Amrulloh', 'A'),
-(89, '0007', '6950aac2d7932e1f1a4c3cf6ada1316e', 'guru', 'guru 7', 'A'),
-(113, '42421057', '001342bff0dc6cabd1bec4b4c0a2a93d', 'siswa', 'Eko Gunawan', 'A'),
-(88, '0006', '7f8bb0fe8b33780a08fe6b60ced14529', 'guru', 'guru 6', 'A'),
-(87, '0005', 'd39934ce111a864abf40391f3da9cdf5', 'guru', 'guru 5', 'A'),
-(86, '0004', '95b09698fda1f64af16708ffb859eab9', 'guru', 'guru 4', 'A'),
-(85, '0003', '7cd86ecb09aa48c6e620b340f6a74592', 'guru', 'guru 3', 'A'),
-(84, '0002', 'fcd04e26e900e94b9ed6dd604fed2b64', 'guru', 'guru 2', 'A'),
-(83, '0001', '25bbdcd06c32d477f7fa1c3e4a91b032', 'guru', 'Matien Hakim Falahudin Bachtiar', 'A'),
-(62, 'tienn', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'admin', 'matienn', 'A'),
-(63, 'matien', '8cb2237d0679ca88db6464eac60da96345513964', 'admin', 'Matiennn', 'A'),
-(112, '42421056', '07008204b59be899249e5b83ab461c04', 'siswa', 'Candrasa Asmaradanta', 'A'),
-(111, '42421055', 'dd1cdecfc1aca098db49f4a3a4aee60e', 'siswa', 'Bayu Aji Assidiq', 'A'),
-(110, '42421054', '34975a3c2cebe4caa8b1aa565be97720', 'siswa', 'Auliya Fitra Sabila', 'A'),
-(127, 'syifa', 'e71a0095d4403a91b782a61c7c358d3c50b6d169', 'admin', 'Syifa', 'A'),
-(128, '42321018', 'b7726843e5467e31610c9bb90b43e888', 'siswa', 'Naylu Syifa', 'A');
+(1, 'admin', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', 'admin', 'A'),
+(2, 'matien', 'c93ccd78b2076528346216b3b2f701e6', 'admin', 'matien', 'A'),
+(21, '001', 'dc5c7986daef50c1e02ab09b442ee34f', 'guru', 'Arain dirgantara,s.Kom', 'A'),
+(22, '0002', 'fcd04e26e900e94b9ed6dd604fed2b64', 'guru', 'Anis Alwi Mubarok,S,Kom', 'A'),
+(23, '0001', '25bbdcd06c32d477f7fa1c3e4a91b032', 'guru', 'Arain dirgantara,s.Kom', 'A'),
+(24, '0002', 'fcd04e26e900e94b9ed6dd604fed2b64', 'guru', 'Anis Alwi Mubarok,S,Kom', 'A'),
+(25, '0003', '7cd86ecb09aa48c6e620b340f6a74592', 'guru', 'Lutfi Sakti M, S.Kom', 'A'),
+(26, '5280', '5b658d2a925565f0755e035597f8d22f', 'siswa', 'ALIFIA TAZKIA', 'A'),
+(27, '5282', '91e82999cf7e45da1070ebd673690716', 'siswa', 'ARJUWAN AREVI', 'A'),
+(28, '5281', '980b2e71a187f092466c13bf42cd6413', 'siswa', 'AURALIA ZAHRA GLADI', 'A'),
+(29, '5283', '5ca359ab1e9e3b9c478459944a2d9ca5', 'siswa', 'DESWITA DIANTI N ', 'A'),
+(30, '5284', '0b9e57c46de934cee33b0e8d1839bfc2', 'siswa', 'DEVA MAULANA', 'A'),
+(31, '5285', '151de84cca69258b17375e2f44239191', 'siswa', 'DIKI AFANDI', 'A'),
+(32, '5286', '48237d9f2dea8c74c2a72126cf63d933', 'siswa', 'DINA LUTFIYANI ', 'A'),
+(33, '5287', 'b937176da86d4bb5f0ac63aaecf540ea', 'siswa', 'ERINA RIZKA FITRIANI', 'A'),
+(34, '5288', '8859a81bd114df94d9f432350c934f4a', 'siswa', 'EVELLYN AURA MAULIDA', 'A'),
+(35, '5289', 'f2925f97bc13ad2852a7a551802feea0', 'siswa', 'FAIQHUBBAFI AHMAD', 'A'),
+(36, '5290', '6e7d5d259be7bf56ed79029c4e621f44', 'siswa', 'FANDILI SETIA DWI YANTO', 'A'),
+(37, '5291', 'be3087e74e9100d4bc4c6268cdbe8456', 'siswa', 'FAREL DWI AVANDI', 'A'),
+(38, '5292', '7e8750d4a701596732953c160d2ae096', 'siswa', 'GAURI YANITA ALMAISYAH', 'A'),
+(39, '5293', '7967cc8e3ab559e68cc944c44b1cf3e8', 'siswa', 'HAZBULLAH AZEEM', 'A'),
+(40, '5294', 'f1e5284674fd1e360873c29337ebe2d7', 'siswa', 'HERLINA TRI AMPERA', 'A'),
+(41, '5296', 'fd9dd764a6f1d73f4340d570804eacc4', 'siswa', 'ISNAENI LINDA AOLIA', 'A'),
+(42, '5297', 'bf5a1d9043100645b2067fa70d7a1ea6', 'siswa', 'MAYZA ZAKIA RAKHMA ', 'A'),
+(43, '5298', '70821a40b06f8751781d5a895357da67', 'siswa', 'MEISA NUR KHOLIFAH', 'A');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `tbl_guru`
+-- Indexes for table `tbl_guru`
 --
 ALTER TABLE `tbl_guru`
   ADD PRIMARY KEY (`nip`);
 
 --
--- Indeks untuk tabel `tbl_guru_mapel`
+-- Indexes for table `tbl_guru_mapel`
 --
 ALTER TABLE `tbl_guru_mapel`
   ADD PRIMARY KEY (`id`),
@@ -363,7 +467,7 @@ ALTER TABLE `tbl_guru_mapel`
   ADD KEY `id_mapel` (`id_mapel`);
 
 --
--- Indeks untuk tabel `tbl_guru_tes`
+-- Indexes for table `tbl_guru_tes`
 --
 ALTER TABLE `tbl_guru_tes`
   ADD PRIMARY KEY (`id`),
@@ -371,7 +475,7 @@ ALTER TABLE `tbl_guru_tes`
   ADD KEY `id_mapel` (`id_mapel`);
 
 --
--- Indeks untuk tabel `tbl_ikut_ujian`
+-- Indexes for table `tbl_ikut_ujian`
 --
 ALTER TABLE `tbl_ikut_ujian`
   ADD PRIMARY KEY (`id`),
@@ -379,7 +483,7 @@ ALTER TABLE `tbl_ikut_ujian`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `tbl_jawaban`
+-- Indexes for table `tbl_jawaban`
 --
 ALTER TABLE `tbl_jawaban`
   ADD PRIMARY KEY (`id`) USING BTREE,
@@ -387,25 +491,39 @@ ALTER TABLE `tbl_jawaban`
   ADD KEY `id_user` (`id_user`) USING BTREE;
 
 --
--- Indeks untuk tabel `tbl_kelas`
+-- Indexes for table `tbl_jurusan`
+--
+ALTER TABLE `tbl_jurusan`
+  ADD PRIMARY KEY (`kode_jurusan`);
+
+--
+-- Indexes for table `tbl_kelas`
 --
 ALTER TABLE `tbl_kelas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tbl_mapel`
+-- Indexes for table `tbl_mapel`
 --
 ALTER TABLE `tbl_mapel`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tbl_siswa`
+-- Indexes for table `tbl_paket_soal`
 --
-ALTER TABLE `tbl_siswa`
-  ADD PRIMARY KEY (`nis`);
+ALTER TABLE `tbl_paket_soal`
+  ADD KEY `id_ujian` (`id_ujian`),
+  ADD KEY `id_soal` (`id_soal`);
 
 --
--- Indeks untuk tabel `tbl_soal`
+-- Indexes for table `tbl_siswa`
+--
+ALTER TABLE `tbl_siswa`
+  ADD PRIMARY KEY (`nis`),
+  ADD KEY `kode_jurusan` (`kode_jurusan`);
+
+--
+-- Indexes for table `tbl_soal`
 --
 ALTER TABLE `tbl_soal`
   ADD PRIMARY KEY (`id`),
@@ -414,62 +532,62 @@ ALTER TABLE `tbl_soal`
   ADD KEY `kelas` (`kelas`);
 
 --
--- Indeks untuk tabel `tbl_user`
+-- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_guru_mapel`
+-- AUTO_INCREMENT for table `tbl_guru_mapel`
 --
 ALTER TABLE `tbl_guru_mapel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_guru_tes`
+-- AUTO_INCREMENT for table `tbl_guru_tes`
 --
 ALTER TABLE `tbl_guru_tes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_ikut_ujian`
+-- AUTO_INCREMENT for table `tbl_ikut_ujian`
 --
 ALTER TABLE `tbl_ikut_ujian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_jawaban`
+-- AUTO_INCREMENT for table `tbl_jawaban`
 --
 ALTER TABLE `tbl_jawaban`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_kelas`
+-- AUTO_INCREMENT for table `tbl_kelas`
 --
 ALTER TABLE `tbl_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_mapel`
+-- AUTO_INCREMENT for table `tbl_mapel`
 --
 ALTER TABLE `tbl_mapel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_soal`
+-- AUTO_INCREMENT for table `tbl_soal`
 --
 ALTER TABLE `tbl_soal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_user`
+-- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
