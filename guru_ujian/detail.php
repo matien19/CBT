@@ -231,11 +231,11 @@ $id = @$_GET['id'];
 
                                   <td>
                                     <center>
-                                      <a href="detail.php?id=<?= $id ?>" class="btn btn-warning btn-sm">
+                                      <!-- <a href="detail.php?id=<?= $id ?>" class="btn btn-warning btn-sm">
                                         <i class="fas fa-search"></i>
                                         Lihat hasil Ujian
                                       </a>
-                                     
+                                      -->
                                       <a href="delete_ikut.php?id=<?= $id;?>&nim=<?= $data_ikut['id_user'];?>" class="btn btn-danger btn-sm"
                                         onclick="return confirm('Anda akan menghapus siswa ikut ujian [ <?= $data_ikut['id_user'].' - '.$data_ikut['nama'] ?> ]?')">
                                         <i class="fas fa-trash"></i>
